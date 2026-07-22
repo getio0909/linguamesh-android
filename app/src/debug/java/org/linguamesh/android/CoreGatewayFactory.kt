@@ -1,0 +1,8 @@
+package org.linguamesh.android
+
+import org.linguamesh.android.core.CoreGateway
+import org.linguamesh.android.core.UnavailableCoreGateway
+
+object CoreGatewayFactory {
+    fun create(): CoreGateway = UnavailableCoreGateway()
+}

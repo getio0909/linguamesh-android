@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_title">LinguaMesh</string>
+    <string name="nav_text_translation">Перевод текста</string>
+    <string name="action_translate">Перевести</string>
+    <string name="action_cancel">Отмена</string>
+    <string name="provider_active">Активный провайдер: %1$s</string>
+    <string name="translation_progress">Переведено сегментов: %1$d из %2$d</string>
+    <plurals name="document_file_count">
+        <item quantity="one">%1$d файл</item>
+        <item quantity="few">%1$d файла</item>
+        <item quantity="many">%1$d файлов</item>
+        <item quantity="other">%1$d файла</item>
+    </plurals>
+    <string name="history_mode__disabled">История отключена</string>
+    <string name="history_mode__enabled">История сохраняется на этом устройстве</string>
+    <string name="history_mode__incognito">В режиме инкогнито этот перевод не сохраняется</string>
+    <string name="error_authentication_failed">Проверьте учетные данные для %1$s и повторите попытку.</string>
+    <plurals name="error_rate_limited">
+        <item quantity="one">Повторите попытку через %1$d секунду.</item>
+        <item quantity="few">Повторите попытку через %1$d секунды.</item>
+        <item quantity="many">Повторите попытку через %1$d секунд.</item>
+        <item quantity="other">Повторите попытку через %1$d секунды.</item>
+    </plurals>
+    <string name="accessibility_stop_translation">Остановить перевод</string>
+    <string name="locale_current">Язык интерфейса: %1$s</string>
+    <string name="error_network_unavailable">Проверьте подключение к сети и повторите попытку.</string>
+    <string name="onboarding_title">Подключить поставщика перевода</string>
+    <string name="onboarding_description">Ваш контент отправляется напрямую настроенному поставщику. LinguaMesh не содержит встроенных ключей API.</string>
+    <string name="provider_name">Название поставщика</string>
+    <string name="field_endpoint">Конечная точка</string>
+    <string name="field_model">Модель</string>
+    <string name="field_api_key">Ключ API (необязательно для локальных поставщиков)</string>
+    <string name="action_save_provider">Сохранить поставщика</string>
+    <string name="field_source_text">Исходный текст</string>
+    <string name="field_translation">Перевод</string>
+    <string name="settings_title">Настройки</string>
+    <string name="settings_theme">Тема</string>
+    <string name="theme_system">Системная</string>
+    <string name="theme_light">Светлая</string>
+    <string name="theme_dark">Тёмная</string>
+    <string name="settings_ui_language">Язык интерфейса</string>
+    <string name="settings_target_language">Целевой язык</string>
+    <string name="status_ready">Готово</string>
+    <string name="status_translating">Выполняется перевод…</string>
+    <string name="status_cancelled">Перевод отменён. Частичный результат сохранён.</string>
+    <string name="error_invalid_profile">Укажите название поставщика, конечную точку и модель.</string>
+    <string name="error_authentication">Проверьте учётные данные поставщика и повторите попытку.</string>
+    <string name="error_incompatible_core">Для этого приложения требуется совместимая библиотека LinguaMesh Core.</string>
+    <string name="error_unknown">Не удалось выполнить перевод. Просмотрите диагностику и повторите попытку.</string>
+    <string name="diagnostics_title">Диагностика</string>
+    <string name="diagnostics_summary">ABI ядра %1$d · Протокол %2$d</string>
+    <string name="action_close_settings">Закрыть настройки</string>
+    <string name="accessibility_source_content">Текст для перевода</string>
+    <string name="accessibility_translation_output">Потоковый результат перевода</string>
+</resources>

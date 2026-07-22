@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_title">LinguaMesh</string>
+    <string name="nav_text_translation">Text translation</string>
+    <string name="action_translate">Translate</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="provider_active">Active provider: %1$s</string>
+    <string name="translation_progress">%1$d of %2$d segments translated</string>
+    <plurals name="document_file_count">
+        <item quantity="one">%1$d file</item>
+        <item quantity="other">%1$d files</item>
+    </plurals>
+    <string name="history_mode__disabled">History is disabled</string>
+    <string name="history_mode__enabled">History is saved on this device</string>
+    <string name="history_mode__incognito">Incognito mode does not save this translation</string>
+    <string name="error_authentication_failed">Check the credentials for %1$s and try again.</string>
+    <plurals name="error_rate_limited">
+        <item quantity="one">Try again in %1$d second.</item>
+        <item quantity="other">Try again in %1$d seconds.</item>
+    </plurals>
+    <string name="accessibility_stop_translation">Stop translation</string>
+    <string name="locale_current">Interface language: %1$s</string>
+    <string name="error_network_unavailable">Check your network connection and try again.</string>
+    <string name="onboarding_title">Connect a translation provider</string>
+    <string name="onboarding_description">Your content goes directly to the provider you configure. LinguaMesh never bundles an API key.</string>
+    <string name="provider_name">Provider name</string>
+    <string name="field_endpoint">Endpoint</string>
+    <string name="field_model">Model</string>
+    <string name="field_api_key">API key (optional for local providers)</string>
+    <string name="action_save_provider">Save provider</string>
+    <string name="field_source_text">Source text</string>
+    <string name="field_translation">Translation</string>
+    <string name="settings_title">Settings</string>
+    <string name="settings_theme">Theme</string>
+    <string name="theme_system">System</string>
+    <string name="theme_light">Light</string>
+    <string name="theme_dark">Dark</string>
+    <string name="settings_ui_language">Interface language</string>
+    <string name="settings_target_language">Target language</string>
+    <string name="status_ready">Ready</string>
+    <string name="status_translating">Translating…</string>
+    <string name="status_cancelled">Translation cancelled. Partial output was kept.</string>
+    <string name="error_invalid_profile">Enter a provider name, endpoint, and model.</string>
+    <string name="error_authentication">Check the provider credential and try again.</string>
+    <string name="error_incompatible_core">This app requires a compatible LinguaMesh Core library.</string>
+    <string name="error_unknown">Translation failed. Review diagnostics and try again.</string>
+    <string name="diagnostics_title">Diagnostics</string>
+    <string name="diagnostics_summary">Core ABI %1$d · Protocol %2$d</string>
+    <string name="action_close_settings">Close settings</string>
+    <string name="accessibility_source_content">Text to translate</string>
+    <string name="accessibility_translation_output">Streamed translation output</string>
+</resources>

@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_title">LinguaMesh</string>
+    <string name="nav_text_translation">ترجمة النص</string>
+    <string name="action_translate">ترجمة</string>
+    <string name="action_cancel">إلغاء</string>
+    <string name="provider_active">المزوّد النشط: %1$s</string>
+    <string name="translation_progress">تمت ترجمة %1$d من %2$d مقاطع</string>
+    <plurals name="document_file_count">
+        <item quantity="zero">لم يتم تحديد أي ملفات (%1$d)</item>
+        <item quantity="one">تم تحديد ملف واحد (%1$d)</item>
+        <item quantity="two">تم تحديد ملفين (%1$d)</item>
+        <item quantity="few">تم تحديد %1$d ملفات</item>
+        <item quantity="many">تم تحديد %1$d ملفًا</item>
+        <item quantity="other">تم تحديد %1$d ملف</item>
+    </plurals>
+    <string name="history_mode__disabled">السجل معطّل</string>
+    <string name="history_mode__enabled">يُحفظ السجل على هذا الجهاز</string>
+    <string name="history_mode__incognito">لا يحفظ وضع التصفح الخفي هذه الترجمة</string>
+    <string name="error_authentication_failed">تحقق من بيانات اعتماد %1$s وحاول مرة أخرى.</string>
+    <plurals name="error_rate_limited">
+        <item quantity="zero">أعد المحاولة الآن (%1$d ثانية).</item>
+        <item quantity="one">أعد المحاولة بعد ثانية واحدة (%1$d).</item>
+        <item quantity="two">أعد المحاولة بعد ثانيتين (%1$d).</item>
+        <item quantity="few">أعد المحاولة بعد %1$d ثوانٍ.</item>
+        <item quantity="many">أعد المحاولة بعد %1$d ثانية.</item>
+        <item quantity="other">أعد المحاولة بعد %1$d ثانية.</item>
+    </plurals>
+    <string name="accessibility_stop_translation">إيقاف الترجمة</string>
+    <string name="locale_current">لغة الواجهة: %1$s</string>
+    <string name="error_network_unavailable">تحقق من اتصال الشبكة وحاول مرة أخرى.</string>
+    <string name="onboarding_title">الاتصال بمزوّد ترجمة</string>
+    <string name="onboarding_description">يُرسل محتواك مباشرةً إلى المزوّد الذي تضبطه. لا يتضمن LinguaMesh أي مفتاح API.</string>
+    <string name="provider_name">اسم المزوّد</string>
+    <string name="field_endpoint">نقطة النهاية</string>
+    <string name="field_model">النموذج</string>
+    <string name="field_api_key">مفتاح API (اختياري للمزوّدين المحليين)</string>
+    <string name="action_save_provider">حفظ المزوّد</string>
+    <string name="field_source_text">النص المصدر</string>
+    <string name="field_translation">الترجمة</string>
+    <string name="settings_title">الإعدادات</string>
+    <string name="settings_theme">السمة</string>
+    <string name="theme_system">النظام</string>
+    <string name="theme_light">فاتح</string>
+    <string name="theme_dark">داكن</string>
+    <string name="settings_ui_language">لغة الواجهة</string>
+    <string name="settings_target_language">اللغة الهدف</string>
+    <string name="status_ready">جاهز</string>
+    <string name="status_translating">جارٍ الترجمة…</string>
+    <string name="status_cancelled">أُلغيت الترجمة. تم الاحتفاظ بالمخرجات الجزئية.</string>
+    <string name="error_invalid_profile">أدخل اسم المزوّد ونقطة النهاية والنموذج.</string>
+    <string name="error_authentication">تحقق من بيانات اعتماد المزوّد وحاول مرة أخرى.</string>
+    <string name="error_incompatible_core">يتطلب هذا التطبيق مكتبة LinguaMesh Core متوافقة.</string>
+    <string name="error_unknown">فشلت الترجمة. راجع معلومات التشخيص وحاول مرة أخرى.</string>
+    <string name="diagnostics_title">التشخيص</string>
+    <string name="diagnostics_summary">Core ABI %1$d · البروتوكول %2$d</string>
+    <string name="action_close_settings">إغلاق الإعدادات</string>
+    <string name="accessibility_source_content">النص المطلوب ترجمته</string>
+    <string name="accessibility_translation_output">مخرجات الترجمة المتدفقة</string>
+</resources>

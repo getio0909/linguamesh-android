@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_title">LinguaMesh</string>
+    <string name="nav_text_translation">Traduction de texte</string>
+    <string name="action_translate">Traduire</string>
+    <string name="action_cancel">Annuler</string>
+    <string name="provider_active">Fournisseur actif : %1$s</string>
+    <string name="translation_progress">%1$d segments traduits sur %2$d</string>
+    <plurals name="document_file_count">
+        <item quantity="one">%1$d fichier</item>
+        <item quantity="many">%1$d fichiers</item>
+        <item quantity="other">%1$d fichiers</item>
+    </plurals>
+    <string name="history_mode__disabled">L’historique est désactivé</string>
+    <string name="history_mode__enabled">L’historique est enregistré sur cet appareil</string>
+    <string name="history_mode__incognito">Le mode navigation privée n’enregistre pas cette traduction</string>
+    <string name="error_authentication_failed">Vérifiez les identifiants de %1$s, puis réessayez.</string>
+    <plurals name="error_rate_limited">
+        <item quantity="one">Réessayez dans %1$d seconde.</item>
+        <item quantity="many">Réessayez dans %1$d secondes.</item>
+        <item quantity="other">Réessayez dans %1$d secondes.</item>
+    </plurals>
+    <string name="accessibility_stop_translation">Arrêter la traduction</string>
+    <string name="locale_current">Langue de l’interface : %1$s</string>
+    <string name="error_network_unavailable">Vérifiez votre connexion réseau, puis réessayez.</string>
+    <string name="onboarding_title">Connecter un fournisseur de traduction</string>
+    <string name="onboarding_description">Votre contenu est envoyé directement au fournisseur que vous configurez. LinguaMesh n’intègre jamais de clé API.</string>
+    <string name="provider_name">Nom du fournisseur</string>
+    <string name="field_endpoint">Point de terminaison</string>
+    <string name="field_model">Modèle</string>
+    <string name="field_api_key">Clé API (facultative pour les fournisseurs locaux)</string>
+    <string name="action_save_provider">Enregistrer le fournisseur</string>
+    <string name="field_source_text">Texte source</string>
+    <string name="field_translation">Traduction</string>
+    <string name="settings_title">Paramètres</string>
+    <string name="settings_theme">Thème</string>
+    <string name="theme_system">Système</string>
+    <string name="theme_light">Clair</string>
+    <string name="theme_dark">Sombre</string>
+    <string name="settings_ui_language">Langue de l’interface</string>
+    <string name="settings_target_language">Langue cible</string>
+    <string name="status_ready">Prêt</string>
+    <string name="status_translating">Traduction en cours…</string>
+    <string name="status_cancelled">Traduction annulée. La sortie partielle a été conservée.</string>
+    <string name="error_invalid_profile">Saisissez un nom de fournisseur, un point de terminaison et un modèle.</string>
+    <string name="error_authentication">Vérifiez l’identifiant du fournisseur et réessayez.</string>
+    <string name="error_incompatible_core">Cette application nécessite une bibliothèque LinguaMesh Core compatible.</string>
+    <string name="error_unknown">La traduction a échoué. Consultez les diagnostics et réessayez.</string>
+    <string name="diagnostics_title">Diagnostics</string>
+    <string name="diagnostics_summary">ABI du Core %1$d · Protocole %2$d</string>
+    <string name="action_close_settings">Fermer les paramètres</string>
+    <string name="accessibility_source_content">Texte à traduire</string>
+    <string name="accessibility_translation_output">Sortie de traduction en continu</string>
+</resources>

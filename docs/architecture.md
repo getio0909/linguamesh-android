@@ -1,13 +1,25 @@
 # Architecture
 
-## Intended client structure
+## Application boundary
 
-The Android client will use Kotlin, Jetpack Compose, Material 3, coroutines, Flow, and Android platform APIs. Screens will expose immutable state and unidirectional events. A single tested core-bridge module will consume the generated Android wrapper; raw JNI calls must not spread through the application.
+`LinguaMeshApplication` owns an application-scoped `AppContainer`. The container provides one `CoreGateway`, an Android Keystore credential broker, and a DataStore-backed UI preferences repository. Activity and ViewModel recreation must not close the application-owned gateway.
 
-The native layer owns UI, accessibility, lifecycle, secure credential resolution, file selection and leases, clipboard/share integration, notifications, WorkManager scheduling, and foreground-service behavior. The shared Rust core owns providers, routing, translation, documents, shared persistence, and typed command/event semantics.
+`TranslationViewModel` exposes immutable `StateFlow` state and accepts unidirectional UI events. Provider registration, credential persistence, Core polling, and cancellation requests run away from the main thread. A stream that ends without `completed`, `cancelled`, or `failed` is treated as a protocol failure.
 
-Core event polling, file work, and network work must run outside the main thread, with normalized state dispatched to Compose. Secrets must cross the host-service boundary only for the intended operation and must never enter normal UI state or persistence.
+## Core boundary
 
-## Current boundary
+`CoreGateway` is the only app-facing Core contract. Debug builds bind `UnavailableCoreGateway`, so the UI can be built and tested without claiming translation capability. Release builds bind `NativeCoreGateway` from `app/src/release/` and require the exact staged AAR named in `core-sdk/README.md`.
 
-No Gradle project, application module, wrapper, or runtime code exists at this checkpoint. This document defines constraints and does not claim an Android implementation.
+`core-sdk/REVISION` pins Core commit `8837e59395742b5385af5037aa36a2596af3b025`, ABI major 1,
+and protocol version 1. CI builds the AAR from that source instead of resolving a mutable or
+unverified binary dependency. `CoreResult.RESOURCE_EXHAUSTED` is mapped to a safe protocol failure.
+
+The release adapter validates operation identity, correlation identity, and increasing sequence numbers. Coroutine cancellation sends a Core cancellation request and drains the cancelled operation on `Dispatchers.IO` for a bounded interval. If a matching terminal event cannot be confirmed, the gateway is isolated and subsequent calls fail with a safe English protocol diagnostic.
+
+## Security and localization
+
+Provider secrets never enter `TranslationUiState` or provider profiles. `AndroidKeystoreCredentialStore` encrypts each value with AES-256-GCM, binds ciphertext to its secret reference with additional authenticated data, clears mutable buffers, and excludes app data from backup and device transfer. The prerelease native adapter still rejects credential-bearing profiles because the generated Core host-response contract is not yet available.
+
+Canonical UI strings are copied from the exact Git revision in `l10n/REVISION`. `tools/sync-l10n.sh` rejects a different or dirty source checkout and stale destination resources. Locale changes use configuration contexts and platform layout-direction resolution; theme and locale preferences persist through DataStore.
+
+Shared provider, routing, translation, document, and persistence semantics remain in `linguamesh-core`.

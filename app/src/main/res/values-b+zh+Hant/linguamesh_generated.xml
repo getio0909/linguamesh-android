@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_title">LinguaMesh</string>
+    <string name="nav_text_translation">文字翻譯</string>
+    <string name="action_translate">翻譯</string>
+    <string name="action_cancel">取消</string>
+    <string name="provider_active">目前提供者：%1$s</string>
+    <string name="translation_progress">已翻譯 %1$d/%2$d 個片段</string>
+    <plurals name="document_file_count">
+        <item quantity="other">已選取 %1$d 個檔案</item>
+    </plurals>
+    <string name="history_mode__disabled">歷史記錄已停用</string>
+    <string name="history_mode__enabled">歷史記錄儲存在此裝置上</string>
+    <string name="history_mode__incognito">無痕模式不會儲存此翻譯</string>
+    <string name="error_authentication_failed">請檢查 %1$s 的憑證，然後再試一次。</string>
+    <plurals name="error_rate_limited">
+        <item quantity="other">請在 %1$d 秒後再試一次。</item>
+    </plurals>
+    <string name="accessibility_stop_translation">停止翻譯</string>
+    <string name="locale_current">介面語言：%1$s</string>
+    <string name="error_network_unavailable">請檢查網路連線，然後再試一次。</string>
+    <string name="onboarding_title">連接翻譯服務供應商</string>
+    <string name="onboarding_description">你的內容會直接傳送給你設定的服務供應商。LinguaMesh 不內建任何 API 金鑰。</string>
+    <string name="provider_name">供應商名稱</string>
+    <string name="field_endpoint">端點</string>
+    <string name="field_model">模型</string>
+    <string name="field_api_key">API 金鑰（本機供應商可選）</string>
+    <string name="action_save_provider">儲存供應商</string>
+    <string name="field_source_text">來源文字</string>
+    <string name="field_translation">譯文</string>
+    <string name="settings_title">設定</string>
+    <string name="settings_theme">主題</string>
+    <string name="theme_system">跟隨系統</string>
+    <string name="theme_light">淺色</string>
+    <string name="theme_dark">深色</string>
+    <string name="settings_ui_language">介面語言</string>
+    <string name="settings_target_language">目標語言</string>
+    <string name="status_ready">就緒</string>
+    <string name="status_translating">正在翻譯…</string>
+    <string name="status_cancelled">翻譯已取消。已保留部分輸出。</string>
+    <string name="error_invalid_profile">請輸入供應商名稱、端點和模型。</string>
+    <string name="error_authentication">請檢查供應商憑證，然後再試一次。</string>
+    <string name="error_incompatible_core">此應用程式需要相容的 LinguaMesh Core 程式庫。</string>
+    <string name="error_unknown">翻譯失敗。請檢視診斷資訊後再試一次。</string>
+    <string name="diagnostics_title">診斷</string>
+    <string name="diagnostics_summary">Core ABI %1$d · 通訊協定 %2$d</string>
+    <string name="action_close_settings">關閉設定</string>
+    <string name="accessibility_source_content">待翻譯文字</string>
+    <string name="accessibility_translation_output">串流翻譯輸出</string>
+</resources>

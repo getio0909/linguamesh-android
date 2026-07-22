@@ -13,4 +13,4 @@ It is responsible for:
 
 Provider adapters, routing, translation rules, document codecs, shared SQLite data, and command/event semantics belong to `linguamesh-core`. Canonical UI messages belong to `linguamesh-l10n`.
 
-The current foundation does not claim a buildable or runnable Android application.
+The current checkpoint implements a debug-buildable host-client vertical slice. It does not claim production translation, a verified release build, document workflows, background jobs, or distribution artifacts.

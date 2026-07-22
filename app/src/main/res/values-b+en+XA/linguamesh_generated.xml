@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_title">［ĿïñĝûåṀëšħ~~~］</string>
+    <string name="nav_text_translation">［Ŧëẋŧ ŧŕåñšŀåŧïøñ~~~~~］</string>
+    <string name="action_translate">［Ŧŕåñšŀåŧë~~~］</string>
+    <string name="action_cancel">［Çåñçëŀ~~］</string>
+    <string name="provider_active">［Åçŧïṽë þŕøṽïðëŕ: %1$s~~~~~~~~~］</string>
+    <string name="translation_progress">［%1$d øƒ %2$d šëĝṁëñŧš ŧŕåñšŀåŧëð~~~~~~~~~~~~~~］</string>
+    <plurals name="document_file_count">
+        <item quantity="one">［%1$d ƒïŀë~~~~］</item>
+        <item quantity="other">［%1$d ƒïŀëš~~~~］</item>
+    </plurals>
+    <string name="history_mode__disabled">［Ħïšŧøŕÿ ïš ðïšåƀŀëð~~~~~~］</string>
+    <string name="history_mode__enabled">［Ħïšŧøŕÿ ïš šåṽëð øñ ŧħïš ðëṽïçë~~~~~~~~~~］</string>
+    <string name="history_mode__incognito">［Ïñçøĝñïŧø ṁøðë ðøëš ñøŧ šåṽë ŧħïš ŧŕåñšŀåŧïøñ~~~~~~~~~~~~~~~］</string>
+    <string name="error_authentication_failed">［Çħëçķ ŧħë çŕëðëñŧïåŀš ƒøŕ %1$s åñð ŧŕÿ åĝåïñ.~~~~~~~~~~~~~~~~~］</string>
+    <plurals name="error_rate_limited">
+        <item quantity="one">［Ŧŕÿ åĝåïñ ïñ %1$d šëçøñð.~~~~~~~~~~］</item>
+        <item quantity="other">［Ŧŕÿ åĝåïñ ïñ %1$d šëçøñðš.~~~~~~~~~~］</item>
+    </plurals>
+    <string name="accessibility_stop_translation">［Šŧøþ ŧŕåñšŀåŧïøñ~~~~~］</string>
+    <string name="locale_current">［Ïñŧëŕƒåçë ŀåñĝûåĝë: %1$s~~~~~~~~~~］</string>
+    <string name="error_network_unavailable">［Çħëçķ ÿøûŕ ñëŧŵøŕķ çøññëçŧïøñ åñð ŧŕÿ åĝåïñ.~~~~~~~~~~~~~~］</string>
+    <string name="onboarding_title">［Çøññëçŧ å ŧŕåñšŀåŧïøñ þŕøṽïðëŕ~~~~~~~~~~］</string>
+    <string name="onboarding_description">［Ÿøûŕ çøñŧëñŧ ĝøëš ðïŕëçŧŀÿ ŧø ŧħë þŕøṽïðëŕ ÿøû çøñƒïĝûŕë. ĿïñĝûåṀëšħ ñëṽëŕ ƀûñðŀëš åñ ÅÞÏ ķëÿ.~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~］</string>
+    <string name="provider_name">［Þŕøṽïðëŕ ñåṁë~~~~］</string>
+    <string name="field_endpoint">［Ëñðþøïñŧ~~］</string>
+    <string name="field_model">［Ṁøðëŀ~~］</string>
+    <string name="field_api_key">［ÅÞÏ ķëÿ (øþŧïøñåŀ ƒøŕ ŀøçåŀ þŕøṽïðëŕš)~~~~~~~~~~~~］</string>
+    <string name="action_save_provider">［Šåṽë þŕøṽïðëŕ~~~~］</string>
+    <string name="field_source_text">［Šøûŕçë ŧëẋŧ~~~］</string>
+    <string name="field_translation">［Ŧŕåñšŀåŧïøñ~~~］</string>
+    <string name="settings_title">［Šëŧŧïñĝš~~］</string>
+    <string name="settings_theme">［Ŧħëṁë~~］</string>
+    <string name="theme_system">［Šÿšŧëṁ~~］</string>
+    <string name="theme_light">［Ŀïĝħŧ~~］</string>
+    <string name="theme_dark">［Ðåŕķ~~］</string>
+    <string name="settings_ui_language">［Ïñŧëŕƒåçë ŀåñĝûåĝë~~~~~~］</string>
+    <string name="settings_target_language">［Ŧåŕĝëŧ ŀåñĝûåĝë~~~~~］</string>
+    <string name="status_ready">［Ŕëåðÿ~~］</string>
+    <string name="status_translating">［Ŧŕåñšŀåŧïñĝ…~~~~］</string>
+    <string name="status_cancelled">［Ŧŕåñšŀåŧïøñ çåñçëŀŀëð. Þåŕŧïåŀ øûŧþûŧ ŵåš ķëþŧ.~~~~~~~~~~~~~~~］</string>
+    <string name="error_invalid_profile">［Ëñŧëŕ å þŕøṽïðëŕ ñåṁë, ëñðþøïñŧ, åñð ṁøðëŀ.~~~~~~~~~~~~~~］</string>
+    <string name="error_authentication">［Çħëçķ ŧħë þŕøṽïðëŕ çŕëðëñŧïåŀ åñð ŧŕÿ åĝåïñ.~~~~~~~~~~~~~~］</string>
+    <string name="error_incompatible_core">［Ŧħïš åþþ ŕëǫûïŕëš å çøṁþåŧïƀŀë ĿïñĝûåṀëšħ Çøŕë ŀïƀŕåŕÿ.~~~~~~~~~~~~~~~~~~］</string>
+    <string name="error_unknown">［Ŧŕåñšŀåŧïøñ ƒåïŀëð. Ŕëṽïëŵ ðïåĝñøšŧïçš åñð ŧŕÿ åĝåïñ.~~~~~~~~~~~~~~~~~］</string>
+    <string name="diagnostics_title">［Ðïåĝñøšŧïçš~~~］</string>
+    <string name="diagnostics_summary">［Çøŕë ÅƁÏ %1$d · Þŕøŧøçøŀ %2$d~~~~~~~~~~~~~］</string>
+    <string name="action_close_settings">［Çŀøšë šëŧŧïñĝš~~~~］</string>
+    <string name="accessibility_source_content">［Ŧëẋŧ ŧø ŧŕåñšŀåŧë~~~~~］</string>
+    <string name="accessibility_translation_output">［Šŧŕëåṁëð ŧŕåñšŀåŧïøñ øûŧþûŧ~~~~~~~~~］</string>
+</resources>

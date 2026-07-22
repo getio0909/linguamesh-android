@@ -1,26 +1,41 @@
 # Testing
 
-## Available now
+## Prerequisites
 
-Setup requires only Bash, Git, and standard POSIX utilities. From the repository root run:
+Use JDK 21 and Android SDK platform 36 with build-tools 36.0.0. Set `ANDROID_HOME` when the SDK is not discoverable. Localization validation requires a clean `linguamesh-l10n` worktree at revision `3724cc9d436ebdbac3b8ebf0df9bce9af1b41b15`; set `LINGUAMESH_L10N_DIR` when it is not the default sibling checkout.
+
+Release validation additionally requires the AAR built from the exact Core revision recorded in
+`core-sdk/REVISION`. The reproducible CI path uses JDK 21 for Core, NDK 28.2.13676358, Rust 1.93.0,
+Gradle 9.5.0, and then JDK 21 for the Android client.
+
+## Required debug checks
+
+From the repository root run:
 
 ```sh
 ./tools/check-foundation.sh
+./tools/sync-l10n.sh --check
+./gradlew assembleDebug
+./gradlew testDebugUnitTest
+./gradlew compileDebugAndroidTestKotlin
+./gradlew lintDebug
 ```
 
-This verifies required foundation files, the global-goal revision pin, repository identity, line endings, and trailing whitespace. It is the only implemented format/lint/test check. There is no Android build.
+JVM tests cover provider validation and credential rollback, streaming and terminal-state handling, cancellation recovery bounds and identity isolation, profile switching, and application-scoped gateway ownership. The instrumentation source compiles a responsive Compose workspace test.
 
-## Planned commands, unavailable now
+`compileDebugAndroidTestKotlin` does not execute instrumentation. Run `./gradlew connectedDebugAndroidTest` only with a documented API 26-or-newer emulator or device, then record its model, API level, locale, and result. Accessibility, restoration, RTL screenshot, macrobenchmark, and real Core integration suites are not implemented yet.
 
-The following command contract is planned but cannot run until the checked-in Gradle wrapper, version catalog, and Android modules exist:
+## Release limit
+
+Do not substitute a fabricated AAR to make release tasks pass. After a verified compatible AAR is
+staged, run:
 
 ```sh
-./gradlew --version
-./gradlew spotlessCheck
-./gradlew lint
-./gradlew testDebugUnitTest
-./gradlew connectedDebugAndroidTest
-./gradlew assembleDebug
+./gradlew assembleRelease
+./gradlew testReleaseUnitTest
+./gradlew lintRelease
 ```
 
-Do not report any of these commands as executed at the foundation checkpoint. Instrumentation requires a documented emulator/device configuration; core-wrapper, restoration, accessibility, and macrobenchmark commands must be added when their modules exist.
+The updated CI performs this sequence after building, checking, and staging the pinned Core AAR.
+These release commands remain locally unverified until that artifact exists on this host, and the CI
+definition is not evidence until it runs successfully.

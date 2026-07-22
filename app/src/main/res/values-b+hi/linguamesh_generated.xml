@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_title">LinguaMesh</string>
+    <string name="nav_text_translation">पाठ अनुवाद</string>
+    <string name="action_translate">अनुवाद करें</string>
+    <string name="action_cancel">रद्द करें</string>
+    <string name="provider_active">सक्रिय प्रदाता: %1$s</string>
+    <string name="translation_progress">%2$d में से %1$d खंडों का अनुवाद हुआ</string>
+    <plurals name="document_file_count">
+        <item quantity="one">%1$d फ़ाइल</item>
+        <item quantity="other">%1$d फ़ाइलें</item>
+    </plurals>
+    <string name="history_mode__disabled">इतिहास बंद है</string>
+    <string name="history_mode__enabled">इतिहास इस डिवाइस पर सहेजा जाता है</string>
+    <string name="history_mode__incognito">गुप्त मोड इस अनुवाद को नहीं सहेजता</string>
+    <string name="error_authentication_failed">%1$s के क्रेडेंशियल जाँचें और फिर से कोशिश करें।</string>
+    <plurals name="error_rate_limited">
+        <item quantity="one">%1$d सेकंड बाद फिर से कोशिश करें।</item>
+        <item quantity="other">%1$d सेकंड बाद फिर से कोशिश करें।</item>
+    </plurals>
+    <string name="accessibility_stop_translation">अनुवाद रोकें</string>
+    <string name="locale_current">इंटरफ़ेस भाषा: %1$s</string>
+    <string name="error_network_unavailable">अपना नेटवर्क कनेक्शन जाँचें और फिर से कोशिश करें।</string>
+    <string name="onboarding_title">अनुवाद प्रदाता से कनेक्ट करें</string>
+    <string name="onboarding_description">आपकी सामग्री सीधे आपके कॉन्फ़िगर किए गए प्रदाता के पास जाती है। LinguaMesh में कोई API कुंजी शामिल नहीं होती।</string>
+    <string name="provider_name">प्रदाता का नाम</string>
+    <string name="field_endpoint">एंडपॉइंट</string>
+    <string name="field_model">मॉडल</string>
+    <string name="field_api_key">API कुंजी (स्थानीय प्रदाताओं के लिए वैकल्पिक)</string>
+    <string name="action_save_provider">प्रदाता सहेजें</string>
+    <string name="field_source_text">स्रोत टेक्स्ट</string>
+    <string name="field_translation">अनुवाद</string>
+    <string name="settings_title">सेटिंग</string>
+    <string name="settings_theme">थीम</string>
+    <string name="theme_system">सिस्टम</string>
+    <string name="theme_light">हल्की</string>
+    <string name="theme_dark">गहरी</string>
+    <string name="settings_ui_language">इंटरफ़ेस की भाषा</string>
+    <string name="settings_target_language">लक्ष्य भाषा</string>
+    <string name="status_ready">तैयार</string>
+    <string name="status_translating">अनुवाद हो रहा है…</string>
+    <string name="status_cancelled">अनुवाद रद्द किया गया। आंशिक आउटपुट रखा गया।</string>
+    <string name="error_invalid_profile">प्रदाता का नाम, एंडपॉइंट और मॉडल दर्ज करें।</string>
+    <string name="error_authentication">प्रदाता क्रेडेंशियल जाँचें और फिर से प्रयास करें।</string>
+    <string name="error_incompatible_core">इस ऐप के लिए संगत LinguaMesh Core लाइब्रेरी आवश्यक है।</string>
+    <string name="error_unknown">अनुवाद विफल रहा। निदान की समीक्षा करें और फिर से प्रयास करें।</string>
+    <string name="diagnostics_title">निदान</string>
+    <string name="diagnostics_summary">Core ABI %1$d · प्रोटोकॉल %2$d</string>
+    <string name="action_close_settings">सेटिंग बंद करें</string>
+    <string name="accessibility_source_content">अनुवाद किया जाने वाला टेक्स्ट</string>
+    <string name="accessibility_translation_output">स्ट्रीम किया गया अनुवाद आउटपुट</string>
+</resources>

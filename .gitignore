@@ -12,6 +12,8 @@ build/
 captures/
 *.apk
 *.aab
+core-sdk/*.aar
+core-sdk/*.sha256
 *.jks
 *.keystore
 *.log

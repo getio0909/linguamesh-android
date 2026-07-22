@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_title">LinguaMesh</string>
+    <string name="nav_text_translation">Textübersetzung</string>
+    <string name="action_translate">Übersetzen</string>
+    <string name="action_cancel">Abbrechen</string>
+    <string name="provider_active">Aktiver Anbieter: %1$s</string>
+    <string name="translation_progress">%1$d von %2$d Segmenten übersetzt</string>
+    <plurals name="document_file_count">
+        <item quantity="one">%1$d Datei</item>
+        <item quantity="other">%1$d Dateien</item>
+    </plurals>
+    <string name="history_mode__disabled">Der Verlauf ist deaktiviert</string>
+    <string name="history_mode__enabled">Der Verlauf wird auf diesem Gerät gespeichert</string>
+    <string name="history_mode__incognito">Im Inkognitomodus wird diese Übersetzung nicht gespeichert</string>
+    <string name="error_authentication_failed">Prüfen Sie die Anmeldedaten für %1$s und versuchen Sie es erneut.</string>
+    <plurals name="error_rate_limited">
+        <item quantity="one">Versuchen Sie es in %1$d Sekunde erneut.</item>
+        <item quantity="other">Versuchen Sie es in %1$d Sekunden erneut.</item>
+    </plurals>
+    <string name="accessibility_stop_translation">Übersetzung stoppen</string>
+    <string name="locale_current">Oberflächensprache: %1$s</string>
+    <string name="error_network_unavailable">Prüfen Sie die Netzwerkverbindung und versuchen Sie es erneut.</string>
+    <string name="onboarding_title">Übersetzungsanbieter verbinden</string>
+    <string name="onboarding_description">Ihre Inhalte werden direkt an den konfigurierten Anbieter gesendet. LinguaMesh enthält niemals einen API-Schlüssel.</string>
+    <string name="provider_name">Anbietername</string>
+    <string name="field_endpoint">Endpunkt</string>
+    <string name="field_model">Modell</string>
+    <string name="field_api_key">API-Schlüssel (optional für lokale Anbieter)</string>
+    <string name="action_save_provider">Anbieter speichern</string>
+    <string name="field_source_text">Quelltext</string>
+    <string name="field_translation">Übersetzung</string>
+    <string name="settings_title">Einstellungen</string>
+    <string name="settings_theme">Design</string>
+    <string name="theme_system">System</string>
+    <string name="theme_light">Hell</string>
+    <string name="theme_dark">Dunkel</string>
+    <string name="settings_ui_language">Oberflächensprache</string>
+    <string name="settings_target_language">Zielsprache</string>
+    <string name="status_ready">Bereit</string>
+    <string name="status_translating">Übersetzung läuft…</string>
+    <string name="status_cancelled">Übersetzung abgebrochen. Die Teilausgabe wurde beibehalten.</string>
+    <string name="error_invalid_profile">Geben Sie Anbietername, Endpunkt und Modell ein.</string>
+    <string name="error_authentication">Überprüfen Sie die Anbieter-Anmeldedaten und versuchen Sie es erneut.</string>
+    <string name="error_incompatible_core">Diese App benötigt eine kompatible LinguaMesh-Core-Bibliothek.</string>
+    <string name="error_unknown">Übersetzung fehlgeschlagen. Prüfen Sie die Diagnose und versuchen Sie es erneut.</string>
+    <string name="diagnostics_title">Diagnose</string>
+    <string name="diagnostics_summary">Core-ABI %1$d · Protokoll %2$d</string>
+    <string name="action_close_settings">Einstellungen schließen</string>
+    <string name="accessibility_source_content">Zu übersetzender Text</string>
+    <string name="accessibility_translation_output">Gestreamte Übersetzungsausgabe</string>
+</resources>

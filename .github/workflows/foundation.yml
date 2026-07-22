@@ -1,4 +1,4 @@
-name: Foundation validation
+name: Android validation
 
 on:
   push:
@@ -8,11 +8,156 @@ permissions:
   contents: read
 
 jobs:
-  foundation:
-    name: Validate repository foundation
-    runs-on: ubuntu-latest
+  android:
+    name: Build and test debug and release clients
+    runs-on: ubuntu-24.04
+    timeout-minutes: 75
+    env:
+      CORE_DIR: ${{ github.workspace }}/linguamesh-core
+      CORE_REVISION: 8837e59395742b5385af5037aa36a2596af3b025
+      LINGUAMESH_L10N_DIR: ${{ github.workspace }}/linguamesh-l10n
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
-      - name: Validate foundation
+      - name: Check out Android repository
+        # 固定到 actions/checkout v7.0.0。
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
+        with:
+          persist-credentials: false
+
+      - name: Validate repository foundation
         run: ./tools/check-foundation.sh
+
+      - name: Check out pinned localization repository
+        # 固定到 actions/checkout v7.0.0。
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
+        with:
+          repository: getio0909/linguamesh-l10n
+          ref: 3724cc9d436ebdbac3b8ebf0df9bce9af1b41b15
+          path: linguamesh-l10n
+          persist-credentials: false
+
+      - name: Check out pinned Core repository
+        # 固定到 actions/checkout v7.0.0。
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
+        with:
+          repository: getio0909/linguamesh-core
+          ref: 8837e59395742b5385af5037aa36a2596af3b025
+          path: linguamesh-core
+          persist-credentials: false
+
+      - name: Set up Java 21 for Android client
+        # 固定到 actions/setup-java v5.6.0。
+        uses: actions/setup-java@03ad4de0992f5dab5e18fcb136590ce7c4a0ac95
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: Set up Android SDK
+        # 固定到 android-actions/setup-android v4.0.1。
+        uses: android-actions/setup-android@40fd30fb8d7440372e1316f5d1809ec01dcd3699
+
+      - name: Install pinned Android SDK packages
+        run: >-
+          sdkmanager
+          "platform-tools"
+          "platforms;android-36"
+          "build-tools;36.0.0"
+          "ndk;28.2.13676358"
+          "cmake;3.22.1"
+
+      - name: Set up Gradle
+        # 固定到 gradle/actions setup-gradle v6.2.0。
+        uses: gradle/actions/setup-gradle@3f131e8634966bd73d06cc69884922b02e6faf92
+        with:
+          gradle-version: "9.5.0"
+          cache-provider: basic
+
+      - name: Validate pinned revisions and Gradle versions
+        run: |
+          set -euo pipefail
+          [[ "$(cat core-sdk/REVISION)" == "$CORE_REVISION" ]]
+          [[ "$(git -C "$CORE_DIR" rev-parse HEAD)" == "$CORE_REVISION" ]]
+          gradle --version | grep -F 'Gradle 9.5.0'
+          ./gradlew --version | grep -F 'Gradle 9.5.0'
+
+      - name: Validate generated localization resources
+        run: ./tools/sync-l10n.sh --check
+
+      - name: Assemble debug client
+        run: ./gradlew assembleDebug
+
+      - name: Run JVM unit tests
+        run: ./gradlew testDebugUnitTest
+
+      - name: Compile instrumentation tests
+        run: ./gradlew compileDebugAndroidTestKotlin
+
+      - name: Run Android lint
+        run: ./gradlew lintDebug
+
+      - name: Set up Java 21 for Core AAR
+        # 固定到 actions/setup-java v5.6.0。
+        uses: actions/setup-java@03ad4de0992f5dab5e18fcb136590ce7c4a0ac95
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: Set up pinned Rust toolchain
+        # 固定到 Rust 1.93.0 工具链动作提交。
+        uses: dtolnay/rust-toolchain@d0befba8b9ddf874327619e84c39b094edd58b66
+
+      - name: Build pinned Core AAR
+        run: |
+          set -euo pipefail
+          android_sdk_root="${ANDROID_SDK_ROOT:-${ANDROID_HOME:-}}"
+          if [[ -z "$android_sdk_root" ]]; then
+            printf '%s\n' 'Android SDK root is unavailable.' >&2
+            exit 1
+          fi
+          export ANDROID_NDK_HOME="$android_sdk_root/ndk/28.2.13676358"
+          git -C "$CORE_DIR" diff --exit-code
+          (
+            cd "$CORE_DIR"
+            bash tools/build-android-sdk.sh
+          )
+
+      - name: Verify and stage Core AAR
+        run: |
+          set -euo pipefail
+          aar_directory="$CORE_DIR/bindings/android/core/build/outputs/aar"
+          aar_path="$aar_directory/core-release.aar"
+          (
+            cd "$aar_directory"
+            sha256sum --check SHA256SUMS
+          )
+          jq -e --arg revision "$CORE_REVISION" '
+            .schema_version == 1 and
+            .package_version == "0.1.0-alpha.1" and
+            .abi_major == 1 and
+            .protocol_version == 1 and
+            .android_abis == ["arm64-v8a", "armeabi-v7a", "x86_64"] and
+            .source_revision == $revision and
+            .artifact_status == "prerelease"
+          ' "$aar_directory/build-metadata.json"
+          ./tools/stage-core-sdk.sh "$aar_path"
+          [[ "$(sha256sum "$aar_path" | cut -d ' ' -f 1)" == \
+            "$(sha256sum core-sdk/linguamesh-core-android-0.1.0-alpha.1.aar | cut -d ' ' -f 1)" ]]
+          (
+            cd core-sdk
+            sha256sum --check linguamesh-core-android-0.1.0-alpha.1.aar.sha256
+          )
+
+      - name: Set up Java 21 for release client
+        # 固定到 actions/setup-java v5.6.0。
+        uses: actions/setup-java@03ad4de0992f5dab5e18fcb136590ce7c4a0ac95
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: Assemble release client
+        run: ./gradlew assembleRelease
+
+      - name: Run release JVM unit tests
+        run: ./gradlew testReleaseUnitTest
+
+      - name: Run release Android lint
+        run: ./gradlew lintRelease

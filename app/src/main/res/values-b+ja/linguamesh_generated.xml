@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_title">LinguaMesh</string>
+    <string name="nav_text_translation">テキスト翻訳</string>
+    <string name="action_translate">翻訳</string>
+    <string name="action_cancel">キャンセル</string>
+    <string name="provider_active">使用中のプロバイダー：%1$s</string>
+    <string name="translation_progress">%2$d 件中 %1$d 件のセグメントを翻訳済み</string>
+    <plurals name="document_file_count">
+        <item quantity="other">%1$d 個のファイル</item>
+    </plurals>
+    <string name="history_mode__disabled">履歴は無効です</string>
+    <string name="history_mode__enabled">履歴はこのデバイスに保存されます</string>
+    <string name="history_mode__incognito">シークレットモードではこの翻訳は保存されません</string>
+    <string name="error_authentication_failed">%1$s の認証情報を確認して、もう一度お試しください。</string>
+    <plurals name="error_rate_limited">
+        <item quantity="other">%1$d 秒後にもう一度お試しください。</item>
+    </plurals>
+    <string name="accessibility_stop_translation">翻訳を停止</string>
+    <string name="locale_current">インターフェイスの言語：%1$s</string>
+    <string name="error_network_unavailable">ネットワーク接続を確認して、もう一度お試しください。</string>
+    <string name="onboarding_title">翻訳プロバイダーに接続</string>
+    <string name="onboarding_description">コンテンツは設定したプロバイダーに直接送信されます。LinguaMesh に API キーは組み込まれていません。</string>
+    <string name="provider_name">プロバイダー名</string>
+    <string name="field_endpoint">エンドポイント</string>
+    <string name="field_model">モデル</string>
+    <string name="field_api_key">API キー（ローカルプロバイダーでは省略可）</string>
+    <string name="action_save_provider">プロバイダーを保存</string>
+    <string name="field_source_text">原文</string>
+    <string name="field_translation">翻訳</string>
+    <string name="settings_title">設定</string>
+    <string name="settings_theme">テーマ</string>
+    <string name="theme_system">システム</string>
+    <string name="theme_light">ライト</string>
+    <string name="theme_dark">ダーク</string>
+    <string name="settings_ui_language">インターフェースの言語</string>
+    <string name="settings_target_language">翻訳先の言語</string>
+    <string name="status_ready">準備完了</string>
+    <string name="status_translating">翻訳中…</string>
+    <string name="status_cancelled">翻訳をキャンセルしました。途中までの出力は保持されています。</string>
+    <string name="error_invalid_profile">プロバイダー名、エンドポイント、モデルを入力してください。</string>
+    <string name="error_authentication">プロバイダーの認証情報を確認して、もう一度お試しください。</string>
+    <string name="error_incompatible_core">このアプリには互換性のある LinguaMesh Core ライブラリが必要です。</string>
+    <string name="error_unknown">翻訳に失敗しました。診断情報を確認して、もう一度お試しください。</string>
+    <string name="diagnostics_title">診断</string>
+    <string name="diagnostics_summary">Core ABI %1$d · プロトコル %2$d</string>
+    <string name="action_close_settings">設定を閉じる</string>
+    <string name="accessibility_source_content">翻訳するテキスト</string>
+    <string name="accessibility_translation_output">ストリーミング翻訳の出力</string>
+</resources>
