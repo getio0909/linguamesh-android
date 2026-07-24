@@ -2,6 +2,23 @@
 
 Status date: 2026-07-22
 
+## 2026-07-24 — typed host-secret transport checkpoint
+
+Assumption: the existing Android Keystore-backed credential store is the host resolver for Core's
+ABI 1 secret channel; Core-owned profile persistence and file-lease projections remain separate
+follow-up contracts.
+
+- The release gateway now passes the profile's opaque `secretRef` to Core, consumes the generated
+  wrapper's typed `SecretRequired` event, validates the requested reference, resolves the secret
+  once, and sends a typed bounded response. Missing or failed storage returns an unavailable
+  resolution; oversized or invalid UTF-8 values are rejected, and resolved byte arrays are cleared
+  immediately after the response call. No secret value enters UI state, DataStore, or diagnostics.
+- Core is pinned to `b39dbdc2877a60c6666697cc0817f31225496cb2`, which adds the typed Android wrapper
+  event/response API while retaining ABI/protocol version 1. The clean Core AAR rebuild and
+  release-client integration are pending hosted validation for this pin.
+- Release remains `unreleased`; device Keystore, Core-owned persistence, document workflows,
+  background execution, signing, distribution, and cross-client conformance remain open.
+
 ## 2026-07-24 — Persisted provider-profile metadata checkpoint
 
 Assumption: Android may persist bounded, non-secret provider-profile metadata in DataStore until
@@ -47,7 +64,7 @@ Validation for this checkpoint on 2026-07-24 with JDK 21 and Android SDK 36:
 - Generated Android resources synchronized from clean `linguamesh-l10n` revision `3724cc9d436ebdbac3b8ebf0df9bce9af1b41b15`; no local `strings.xml` override remains.
 - Sixteen JVM regression tests and one compiling Compose instrumentation test.
 - Core ABI 1 integration pinned to exact source revision
-  `8837e59395742b5385af5037aa36a2596af3b025`; the release adapter maps
+  `b39dbdc2877a60c6666697cc0817f31225496cb2`; the release adapter maps
   `CoreResult.RESOURCE_EXHAUSTED` to a safe protocol failure.
 - GitHub Actions debug and release preparation with immutable Node 24-compatible action revisions,
   `persist-credentials: false`, pinned localization and Core checkouts, NDK 28.2.13676358, Rust
