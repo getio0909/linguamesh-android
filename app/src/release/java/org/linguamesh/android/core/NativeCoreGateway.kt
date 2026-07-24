@@ -94,13 +94,13 @@ class NativeCoreGateway(
                             secretResolver = secretResolver,
                         )
                     }
-                    NativeCoreEvent.Started -> emit(CoreEvent.Started)
+                    is NativeCoreEvent.Started -> emit(CoreEvent.Started)
                     is NativeCoreEvent.TextDelta -> emit(CoreEvent.TextDelta(event.text))
-                    NativeCoreEvent.Completed -> {
+                    is NativeCoreEvent.Completed -> {
                         terminal = true
                         emit(CoreEvent.Completed)
                     }
-                    NativeCoreEvent.Cancelled -> {
+                    is NativeCoreEvent.Cancelled -> {
                         terminal = true
                         emit(CoreEvent.Cancelled)
                     }
