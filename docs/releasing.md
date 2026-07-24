@@ -5,7 +5,7 @@ No Android release is currently verified or publishable. Debug builds use an una
 ## Core staging gate
 
 Release work requires `linguamesh-core-android-0.1.0-alpha.1.aar` built from Core revision
-`b39dbdc2877a60c6666697cc0817f31225496cb2`, with ABI major 1 and protocol version 1. After
+`9e69d01cbae1ca0421923e059aa3252c4ecbe1be`, with ABI major 1 and protocol version 1. After
 independently verifying provenance, metadata, checksum, generated wrapper, and Protobuf runtime,
 stage it locally with:
 

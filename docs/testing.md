@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-Use JDK 21 and Android SDK platform 36 with build-tools 36.0.0. Set `ANDROID_HOME` when the SDK is not discoverable. Localization validation requires a clean `linguamesh-l10n` worktree at revision `3724cc9d436ebdbac3b8ebf0df9bce9af1b41b15`; set `LINGUAMESH_L10N_DIR` when it is not the default sibling checkout.
+Use JDK 21 and Android SDK platform 36 with build-tools 36.0.0. Set `ANDROID_HOME` when the SDK is not discoverable. Localization validation requires a clean `linguamesh-l10n` worktree at revision `7fd210692bb269ef52f7453bfeb2b0f0759b1d4c`; set `LINGUAMESH_L10N_DIR` when it is not the default sibling checkout.
 
 Release validation additionally requires the AAR built from the exact Core revision recorded in
 `core-sdk/REVISION`. The reproducible CI path uses JDK 21 for Core, NDK 28.2.13676358, Rust 1.93.0,

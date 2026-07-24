@@ -2,6 +2,18 @@
 
 Status date: 2026-07-22
 
+## 2026-07-24 — Core VFS-descendant Android compatibility checkpoint
+
+Assumption: Core `9e69d01cbae1ca0421923e059aa3252c4ecbe1be` preserves the Android ABI-1 typed
+host-secret contract while adding Linux-only storage tests; Android consumes the exact revision
+without depending on Linux VFS behavior.
+
+- Android Native CI now checks out Core `9e69d01cbae1ca0421923e059aa3252c4ecbe1be` and l10n
+  `7fd210692bb269ef52f7453bfeb2b0f0759b1d4c`. The release gateway uses the generated typed
+  `SecretRequired`/`sendHostResponse` flow and clears resolved secret bytes immediately.
+- The staged AAR is intentionally not treated as provenance for this new pin until the hosted
+  workflow rebuilds it from the exact Core source. Release remains `unreleased`.
+
 ## 2026-07-24 — typed host-secret transport checkpoint
 
 Assumption: the existing Android Keystore-backed credential store is the host resolver for Core's
@@ -13,7 +25,7 @@ follow-up contracts.
   once, and sends a typed bounded response. Missing or failed storage returns an unavailable
   resolution; oversized or invalid UTF-8 values are rejected, and resolved byte arrays are cleared
   immediately after the response call. No secret value enters UI state, DataStore, or diagnostics.
-- Core is pinned to `b39dbdc2877a60c6666697cc0817f31225496cb2`, which adds the typed Android wrapper
+- Core is pinned to `9e69d01cbae1ca0421923e059aa3252c4ecbe1be`, which includes the typed Android wrapper
   event/response API while retaining ABI/protocol version 1. The clean Core AAR rebuild and
   release-client integration are pending hosted validation for this pin.
 - Release remains `unreleased`; device Keystore, Core-owned persistence, document workflows,
@@ -61,10 +73,10 @@ Validation for this checkpoint on 2026-07-24 with JDK 21 and Android SDK 36:
 - Application-scoped Core gateway contract with an unavailable debug implementation and generated-wrapper release adapter source.
 - Native event identity and sequence validation plus bounded cancellation draining; an unrecoverable or mismatched cancelled operation isolates the gateway.
 - Android Keystore AES-256-GCM credential broker with secret-reference AAD, mutable-buffer clearing, failure rollback, and backup/device-transfer exclusion.
-- Generated Android resources synchronized from clean `linguamesh-l10n` revision `3724cc9d436ebdbac3b8ebf0df9bce9af1b41b15`; no local `strings.xml` override remains.
+- Generated Android resources synchronized from clean `linguamesh-l10n` revision `7fd210692bb269ef52f7453bfeb2b0f0759b1d4c`; no local `strings.xml` override remains.
 - Sixteen JVM regression tests and one compiling Compose instrumentation test.
 - Core ABI 1 integration pinned to exact source revision
-  `b39dbdc2877a60c6666697cc0817f31225496cb2`; the release adapter maps
+  `9e69d01cbae1ca0421923e059aa3252c4ecbe1be`; the release adapter maps
   `CoreResult.RESOURCE_EXHAUSTED` to a safe protocol failure.
 - GitHub Actions debug and release preparation with immutable Node 24-compatible action revisions,
   `persist-credentials: false`, pinned localization and Core checkouts, NDK 28.2.13676358, Rust
@@ -80,7 +92,9 @@ Validation for this checkpoint on 2026-07-24 with JDK 21 and Android SDK 36:
   pin and is not accepted as provenance evidence; the clean pinned rebuild is covered by CI run
   `29932649692`.
 - Debug builds intentionally report Core unavailable and cannot perform real translation.
-- Credential host responses and Core-owned provider-profile persistence/loading are not integrated; the release adapter rejects credential-bearing translation profiles.
+- Core-owned provider-profile persistence/loading, device-backed integration, and document workflows
+  are not integrated; the release adapter now handles credential-bearing profiles through the typed
+  host-secret exchange.
 - Instrumentation, accessibility, restoration, RTL screenshot, macrobenchmark, device Keystore, and real Core integration tests were not executed.
 - Document workflows, Storage Access Framework leases, history, routing, background work, packaging, signing, and distribution remain unimplemented.
 
