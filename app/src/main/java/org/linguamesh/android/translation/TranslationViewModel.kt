@@ -13,6 +13,7 @@ import kotlinx.coroutines.NonCancellable
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -24,6 +25,8 @@ import org.linguamesh.android.core.CoreGatewayException
 import org.linguamesh.android.core.ProviderProfile
 import org.linguamesh.android.core.SecretResolver
 import org.linguamesh.android.core.TranslationCommand
+import org.linguamesh.android.preferences.ProviderProfileRepository
+import org.linguamesh.android.preferences.InMemoryProviderProfileRepository
 import org.linguamesh.android.security.CredentialStore
 
 enum class TranslationStatus {
@@ -57,6 +60,7 @@ class TranslationViewModel(
     private val coreGateway: CoreGateway,
     private val credentialStore: CredentialStore,
     private val backgroundDispatcher: CoroutineDispatcher = Dispatchers.IO,
+    private val providerProfileRepository: ProviderProfileRepository = InMemoryProviderProfileRepository(),
 ) : ViewModel() {
     private val mutableState = MutableStateFlow(
         TranslationUiState(
@@ -66,6 +70,15 @@ class TranslationViewModel(
     )
     val state: StateFlow<TranslationUiState> = mutableState.asStateFlow()
     private var translationJob: Job? = null
+    private val registeredProfileIds = mutableSetOf<String>()
+
+    init {
+        viewModelScope.launch(backgroundDispatcher) {
+            providerProfileRepository.state.collect { persisted ->
+                restoreProfiles(persisted.profiles, persisted.activeProfileId)
+            }
+        }
+    }
 
     fun updateSourceText(value: String) {
         mutableState.update { it.copy(sourceText = value, errorKind = null) }
@@ -117,6 +130,8 @@ class TranslationViewModel(
                     secretRef = secretRef,
                 )
                 coreGateway.saveProviderProfile(profile)
+                registeredProfileIds += profile.id
+                providerProfileRepository.upsert(profile)
                 mutableState.update { current ->
                     current.copy(
                         profiles = current.profiles + profile,
@@ -153,6 +168,9 @@ class TranslationViewModel(
             } else {
                 current.copy(activeProfileId = profileId, errorKind = null)
             }
+        }
+        viewModelScope.launch(backgroundDispatcher) {
+            providerProfileRepository.setActiveProfile(profileId)
         }
     }
 
@@ -244,6 +262,24 @@ class TranslationViewModel(
         }
     }
 
+    private suspend fun restoreProfiles(profiles: List<ProviderProfile>, activeProfileId: String?) {
+        val boundedProfiles = profiles.distinctBy { it.id }.take(MAX_RESTORED_PROFILES)
+        boundedProfiles.forEach { profile ->
+            if (registeredProfileIds.add(profile.id)) {
+                runCatching { coreGateway.saveProviderProfile(profile) }
+                    .onFailure { registeredProfileIds.remove(profile.id) }
+            }
+        }
+        val selectedId = activeProfileId?.takeIf { id -> boundedProfiles.any { it.id == id } }
+            ?: boundedProfiles.firstOrNull()?.id
+        mutableState.update { current ->
+            current.copy(
+                profiles = boundedProfiles,
+                activeProfileId = selectedId,
+            )
+        }
+    }
+
     private fun isAllowedEndpoint(value: String): Boolean {
         val uri = runCatching { URI(value) }.getOrNull() ?: return false
         val host = uri.host?.removeSurrounding("[", "]")?.lowercase() ?: return false
@@ -266,15 +302,21 @@ class TranslationViewModel(
 
     companion object {
         private val LOOPBACK_HOSTS = setOf("localhost", "127.0.0.1", "::1")
+        private const val MAX_RESTORED_PROFILES = 32
 
         fun factory(
             coreGateway: CoreGateway,
             credentialStore: CredentialStore,
+            providerProfileRepository: ProviderProfileRepository = InMemoryProviderProfileRepository(),
         ): ViewModelProvider.Factory = object : ViewModelProvider.Factory {
             @Suppress("UNCHECKED_CAST")
             override fun <T : ViewModel> create(modelClass: Class<T>): T {
                 require(modelClass.isAssignableFrom(TranslationViewModel::class.java))
-                return TranslationViewModel(coreGateway, credentialStore) as T
+                return TranslationViewModel(
+                    coreGateway,
+                    credentialStore,
+                    providerProfileRepository = providerProfileRepository,
+                ) as T
             }
         }
     }

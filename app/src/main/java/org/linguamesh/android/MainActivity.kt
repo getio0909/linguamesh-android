@@ -25,6 +25,7 @@ class MainActivity : ComponentActivity() {
                 factory = TranslationViewModel.factory(
                     coreGateway = container.coreGateway,
                     credentialStore = container.credentialStore,
+                    providerProfileRepository = container.providerProfileRepository,
                 ),
             )
             val translationState by translationViewModel.state.collectAsStateWithLifecycle()

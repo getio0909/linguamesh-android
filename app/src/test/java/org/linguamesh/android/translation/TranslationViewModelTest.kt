@@ -4,6 +4,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.advanceUntilIdle
@@ -27,6 +28,7 @@ import org.linguamesh.android.core.CoreGatewayException
 import org.linguamesh.android.core.ProviderProfile
 import org.linguamesh.android.core.SecretResolver
 import org.linguamesh.android.core.TranslationCommand
+import org.linguamesh.android.preferences.InMemoryProviderProfileRepository
 import org.linguamesh.android.security.CredentialStore
 
 @OptIn(ExperimentalCoroutinesApi::class)
@@ -64,6 +66,56 @@ class TranslationViewModelTest {
         assertEquals(profile, gateway.savedProfiles.single())
         assertTrue(profile?.secretRef?.startsWith("provider/") == true)
         assertFalse(viewModel.state.value.toString().contains("test-secret"))
+    }
+
+    @Test
+    fun restoresProfilesAndRegistersThemWithCore() = runTest(dispatcher) {
+        val profile = ProviderProfile(
+            id = "saved-id",
+            name = "Saved",
+            endpoint = "http://127.0.0.1:8787/v1",
+            model = "fake-translator",
+            secretRef = null,
+        )
+        val repository = InMemoryProviderProfileRepository()
+        repository.upsert(profile)
+        val gateway = FakeCoreGateway()
+
+        val viewModel = TranslationViewModel(
+            gateway,
+            FakeCredentialStore(),
+            dispatcher,
+            repository,
+        )
+        advanceUntilIdle()
+
+        assertEquals(listOf(profile), viewModel.state.value.profiles)
+        assertEquals(profile.id, viewModel.state.value.activeProfileId)
+        assertEquals(listOf(profile), gateway.savedProfiles)
+    }
+
+    @Test
+    fun savingProfilePersistsOnlyTheSecretReference() = runTest(dispatcher) {
+        val repository = InMemoryProviderProfileRepository()
+        val viewModel = TranslationViewModel(
+            FakeCoreGateway(),
+            FakeCredentialStore(),
+            dispatcher,
+            repository,
+        )
+        viewModel.saveProvider(
+            "Saved",
+            "http://127.0.0.1:8787/v1",
+            "fake-translator",
+            "test-secret".toCharArray(),
+        )
+        advanceUntilIdle()
+
+        val persisted = repository.state.first()
+        assertEquals(1, persisted.profiles.size)
+        assertEquals(viewModel.state.value.activeProfileId, persisted.activeProfileId)
+        assertTrue(persisted.profiles.single().secretRef?.startsWith("provider/") == true)
+        assertFalse(persisted.toString().contains("test-secret"))
     }
 
     @Test
