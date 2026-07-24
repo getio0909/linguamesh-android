@@ -119,6 +119,27 @@ class TranslationViewModelTest {
     }
 
     @Test
+    fun profileRepositoryRejectsOversizedMetadataBeforePersistence() = runTest(dispatcher) {
+        val repository = InMemoryProviderProfileRepository()
+        val oversized = ProviderProfile(
+            id = "oversized",
+            name = "x".repeat(2049),
+            endpoint = "https://provider.example/v1",
+            model = "model",
+            secretRef = null,
+        )
+        var rejected = false
+        try {
+            repository.upsert(oversized)
+        } catch (_: IllegalArgumentException) {
+            rejected = true
+        }
+
+        assertTrue(rejected)
+        assertTrue(repository.state.first().profiles.isEmpty())
+    }
+
+    @Test
     fun remotePlaintextEndpointIsRejectedAndInputIsCleared() = runTest(dispatcher) {
         val viewModel = TranslationViewModel(FakeCoreGateway(), FakeCredentialStore(), dispatcher)
         val input = "test-secret".toCharArray()

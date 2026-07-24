@@ -44,7 +44,7 @@ class DataStoreProviderProfileRepository(private val context: Context) : Provide
         }
 
     override suspend fun upsert(profile: ProviderProfile) {
-        require(profile.id.isNotBlank())
+        profile.requireBounded()
         context.providerProfilesDataStore.edit { values ->
             val current = decodeProfiles(values[PROFILES_KEY].orEmpty())
             val next = (current.filterNot { it.id == profile.id } + profile)
@@ -69,6 +69,7 @@ class InMemoryProviderProfileRepository : ProviderProfileRepository {
     override val state: Flow<PersistedProviderProfiles> = mutableState
 
     override suspend fun upsert(profile: ProviderProfile) {
+        profile.requireBounded()
         val next = (mutableState.value.profiles.filterNot { it.id == profile.id } + profile)
             .takeLast(MAX_PROFILES)
         mutableState.value = PersistedProviderProfiles(next, profile.id)
@@ -84,6 +85,14 @@ class InMemoryProviderProfileRepository : ProviderProfileRepository {
 private fun encodeProfiles(profiles: List<ProviderProfile>): String = profiles.joinToString("\n") { profile ->
     listOf(profile.id, profile.name, profile.endpoint, profile.model, profile.secretRef.orEmpty())
         .joinToString("|") { encodeField(it) }
+}
+
+private fun ProviderProfile.requireBounded() {
+    require(id.isNotBlank())
+    require(name.isNotBlank() && name.length <= MAX_FIELD_LENGTH)
+    require(endpoint.isNotBlank() && endpoint.length <= MAX_FIELD_LENGTH)
+    require(model.isNotBlank() && model.length <= MAX_FIELD_LENGTH)
+    require(secretRef == null || (secretRef.isNotBlank() && secretRef.length <= MAX_FIELD_LENGTH))
 }
 
 private fun decodeProfiles(serialized: String): List<ProviderProfile> = serialized

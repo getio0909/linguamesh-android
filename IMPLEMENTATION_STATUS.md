@@ -10,12 +10,13 @@ the Keystore-backed credential store and are represented by an opaque `secretRef
 
 - Added a bounded `ProviderProfileRepository` with a DataStore implementation that stores only
   encoded profile identifiers, display names, endpoints, model IDs, and secret references. Invalid
-  records, duplicate IDs, oversized fields, and unknown active IDs are ignored safely.
+  records, duplicate IDs, oversized fields, and unknown active IDs are rejected or ignored safely;
+  write-time field limits prevent oversized metadata from entering DataStore.
 - The application container now owns the repository. The translation ViewModel restores saved
   profiles on a background dispatcher, re-registers them with Core, preserves the active profile,
   and persists profile creation and active-profile changes without placing credentials in UI state.
-- Added JVM coverage for restart-style restoration/Core registration and the secret-reference-only
-  persistence boundary. The l10n pin and generated manifest now follow
+- Added JVM coverage for restart-style restoration/Core registration, the secret-reference-only
+  persistence boundary, and write-time size rejection. The l10n pin and generated manifest now follow
   `linguamesh-l10n` `7fd210692bb269ef52f7453bfeb2b0f0759b1d4c`.
 - Release remains `unreleased`; Core-owned persistence, device restoration, document workflows,
   background execution, real-provider credentials, signing, and distribution remain open.
@@ -25,11 +26,11 @@ Validation for this checkpoint on 2026-07-24 with JDK 21 and Android SDK 36:
 - `./tools/check-foundation.sh` passed.
 - `./tools/sync-l10n.sh --check` passed at the pinned l10n revision.
 - `ANDROID_HOME=/home/wangtinghu/Android/Sdk ./gradlew testDebugUnitTest --rerun-tasks` passed
-  (18 tests, 0 failures).
+  (19 tests, 0 failures).
 - `ANDROID_HOME=/home/wangtinghu/Android/Sdk ./gradlew assembleDebug
   compileDebugAndroidTestKotlin lintDebug` passed.
 - `ANDROID_HOME=/home/wangtinghu/Android/Sdk ./gradlew assembleRelease testReleaseUnitTest
-  lintRelease` passed; the staged AAR remains prior-pin provenance and is not treated as a clean
+  lintRelease` passed (19 release tests); the staged AAR remains prior-pin provenance and is not treated as a clean
   Core rebuild.
 - Hosted Android workflow `30091714901` passed clean Core AAR provenance checks, debug/release
   builds, 18 JVM tests per variant, instrumentation compilation, and debug/release lint.
