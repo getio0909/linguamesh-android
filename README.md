@@ -4,7 +4,7 @@ Native Android client for LinguaMesh, built with Kotlin, Jetpack Compose, corout
 
 ## Current status
 
-The repository contains a buildable debug application and one translation-workspace vertical slice: provider onboarding, profile selection, streaming state, cancellation, theme and locale preferences, responsive Compose UI, and accessibility semantics. Debug builds deliberately use `UnavailableCoreGateway`; they validate the host UI but cannot perform real translation. Release source targets the exact Core ABI 1 revision in `core-sdk/REVISION`. CI is prepared to build and stage that AAR, but release assembly remains unverified until the updated job passes.
+The repository contains a buildable debug application and one translation-workspace vertical slice: provider onboarding, profile selection, streaming state, cancellation, theme and locale preferences, responsive Compose UI, and accessibility semantics. Debug builds deliberately use `UnavailableCoreGateway`; they validate the host UI but cannot perform real translation. Release source targets the exact Core ABI 1 revision in `core-sdk/REVISION`. Hosted workflow `30099769434` rebuilt and verified that pinned AAR, then passed debug/release assembly, JVM tests, instrumentation compilation, and lint. Device, document, signing, and distribution evidence remain open.
 
 ## Source layout
 

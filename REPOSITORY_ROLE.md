@@ -13,4 +13,6 @@ It is responsible for:
 
 Provider adapters, routing, translation rules, document codecs, shared SQLite data, and command/event semantics belong to `linguamesh-core`. Canonical UI messages belong to `linguamesh-l10n`.
 
-The current checkpoint implements a debug-buildable host-client vertical slice. It does not claim production translation, a verified release build, document workflows, background jobs, or distribution artifacts.
+The current checkpoint implements a debug-buildable host-client vertical slice and a hosted-verified
+ABI-1 release gateway against Core `9e69d01cbae1ca0421923e059aa3252c4ecbe1be`. It does not claim
+device translation, document workflows, background jobs, signing, or distribution artifacts.

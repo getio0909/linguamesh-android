@@ -1,6 +1,6 @@
 # Implementation Status
 
-Status date: 2026-07-22
+Status date: 2026-07-24
 
 ## 2026-07-24 — Core VFS-descendant Android compatibility checkpoint
 
@@ -11,8 +11,10 @@ without depending on Linux VFS behavior.
 - Android Native CI now checks out Core `9e69d01cbae1ca0421923e059aa3252c4ecbe1be` and l10n
   `7fd210692bb269ef52f7453bfeb2b0f0759b1d4c`. The release gateway uses the generated typed
   `SecretRequired`/`sendHostResponse` flow and clears resolved secret bytes immediately.
-- The staged AAR is intentionally not treated as provenance for this new pin until the hosted
-  workflow rebuilds it from the exact Core source. Release remains `unreleased`.
+- Hosted workflow `30099769434` rebuilt and checksum-verified the AAR from the exact Core source,
+  then passed debug/release assembly, 19 JVM tests per variant, instrumentation compilation, and
+  debug/release lint. This validates the Android ABI-1 compatibility checkpoint; release remains
+  `unreleased` because device, document, signing, and distribution evidence is still open.
 
 ## 2026-07-24 — typed host-secret transport checkpoint
 
@@ -27,7 +29,7 @@ follow-up contracts.
   immediately after the response call. No secret value enters UI state, DataStore, or diagnostics.
 - Core is pinned to `9e69d01cbae1ca0421923e059aa3252c4ecbe1be`, which includes the typed Android wrapper
   event/response API while retaining ABI/protocol version 1. The clean Core AAR rebuild and
-  release-client integration are pending hosted validation for this pin.
+  release-client integration passed hosted validation in workflow `30099769434`.
 - Release remains `unreleased`; device Keystore, Core-owned persistence, document workflows,
   background execution, signing, distribution, and cross-client conformance remain open.
 
@@ -88,9 +90,8 @@ Validation for this checkpoint on 2026-07-24 with JDK 21 and Android SDK 36:
 
 ## Not implemented or not verified
 
-- The locally staged Core AAR is checksum-verified, but it was built before this checkpoint's Core
-  pin and is not accepted as provenance evidence; the clean pinned rebuild is covered by CI run
-  `29932649692`.
+- The locally staged Core AAR may still be an older developer artifact; provenance for the current
+  pin is the clean CI rebuild and metadata/checksum verification in workflow `30099769434`.
 - Debug builds intentionally report Core unavailable and cannot perform real translation.
 - Core-owned provider-profile persistence/loading, device-backed integration, and document workflows
   are not integrated; the release adapter now handles credential-bearing profiles through the typed

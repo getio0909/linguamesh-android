@@ -37,5 +37,6 @@ staged, run:
 ```
 
 The updated CI performs this sequence after building, checking, and staging the pinned Core AAR.
-These release commands remain locally unverified until that artifact exists on this host, and the CI
-definition is not evidence until it runs successfully.
+Workflow `30099769434` passed the complete hosted sequence for Core `9e69d01cbae1ca0421923e059aa3252c4ecbe1be`.
+Local release commands still require a freshly staged artifact and are not evidence of device or
+distribution readiness.

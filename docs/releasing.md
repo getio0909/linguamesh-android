@@ -17,8 +17,8 @@ The script copies the ignored artifact and writes a portable local SHA-256 file;
 provenance or compatibility by itself. CI checks out the exact Core revision, installs NDK
 28.2.13676358, Rust 1.93.0, and Gradle 9.5.0, builds the AAR, verifies `SHA256SUMS` and
 `build-metadata.json`, stages the AAR, and then runs release assembly, unit tests, and lint. Do not
-treat this definition as release evidence until the workflow passes. No remote AAR is currently an
-authenticated or verified input.
+treat this definition as release evidence until the workflow passes. Workflow `30099769434` is the
+current successful evidence for the pinned Core revision; no remote AAR is used as an input.
 
 ## Release requirements
 
