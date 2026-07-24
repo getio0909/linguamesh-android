@@ -2,7 +2,7 @@
 set -euo pipefail
 
 expected_goal_sha="11f9a65927aac7e57e2af119e9d21cc98e8d5a08b8a112a19ee1c47903e36198"
-expected_l10n_revision="3724cc9d436ebdbac3b8ebf0df9bce9af1b41b15"
+expected_l10n_revision="7fd210692bb269ef52f7453bfeb2b0f0759b1d4c"
 expected_core_revision="8837e59395742b5385af5037aa36a2596af3b025"
 required_files=(
   README.md
