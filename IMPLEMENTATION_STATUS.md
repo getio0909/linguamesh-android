@@ -31,6 +31,8 @@ Validation for this checkpoint on 2026-07-24 with JDK 21 and Android SDK 36:
 - `ANDROID_HOME=/home/wangtinghu/Android/Sdk ./gradlew assembleRelease testReleaseUnitTest
   lintRelease` passed; the staged AAR remains prior-pin provenance and is not treated as a clean
   Core rebuild.
+- Hosted Android workflow `30091714901` passed clean Core AAR provenance checks, debug/release
+  builds, 18 JVM tests per variant, instrumentation compilation, and debug/release lint.
 
 ## Implemented
 
