@@ -33,7 +33,9 @@ Validation for this checkpoint on 2026-07-24 with JDK 21 and Android SDK 36:
   lintRelease` passed (19 release tests); the staged AAR remains prior-pin provenance and is not treated as a clean
   Core rebuild.
 - Hosted Android workflow `30091714901` passed clean Core AAR provenance checks, debug/release
-  builds, 18 JVM tests per variant, instrumentation compilation, and debug/release lint.
+  builds, 18 JVM tests per variant, instrumentation compilation, and debug/release lint. The final
+  bounded-write head `535e4485ff555b04702c0390ca76428ff995d457` passed the same gates in workflow
+  `30092613918`, including 19 JVM tests per variant.
 
 ## Implemented
 
