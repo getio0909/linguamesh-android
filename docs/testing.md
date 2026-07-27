@@ -23,7 +23,11 @@ From the repository root run:
 
 JVM tests cover provider validation and credential rollback, streaming and terminal-state handling, cancellation recovery bounds and identity isolation, profile switching, and application-scoped gateway ownership. The instrumentation source compiles a responsive Compose workspace test.
 
-`compileDebugAndroidTestKotlin` does not execute instrumentation. Run `./gradlew connectedDebugAndroidTest` only with a documented API 26-or-newer emulator or device, then record its model, API level, locale, and result. Accessibility, restoration, RTL screenshot, macrobenchmark, and real Core integration suites are not implemented yet.
+Hosted CI runs `./gradlew connectedDebugAndroidTest` on an API 35 x86_64 Pixel 2 emulator with
+animations disabled and software GPU rendering. Local runs still require a documented API
+26-or-newer emulator or device; record its model, API level, locale, and result. This executes the
+Compose instrumentation fixture but does not provide real Core integration, accessibility review,
+restoration, RTL screenshot, macrobenchmark, or physical-device evidence.
 
 ## Release limit
 

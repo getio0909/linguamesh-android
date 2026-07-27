@@ -11,7 +11,7 @@ jobs:
   android:
     name: Build and test debug and release clients
     runs-on: ubuntu-24.04
-    timeout-minutes: 75
+    timeout-minutes: 90
     env:
       CORE_DIR: ${{ github.workspace }}/linguamesh-core
       CORE_REVISION: cb061d24a3e0c4059a65d099d30bc643e9e079ea
@@ -90,6 +90,25 @@ jobs:
 
       - name: Compile instrumentation tests
         run: ./gradlew compileDebugAndroidTestKotlin
+
+      - name: Enable KVM for the hosted emulator
+        run: |
+          set -euo pipefail
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+
+      - name: Run Compose instrumentation tests on API 35
+        # 固定 ReactiveCircus android-emulator-runner v2.38.0。
+        uses: ReactiveCircus/android-emulator-runner@cad321644df6d8cf1985a42767272ff068adb9cb
+        with:
+          api-level: 35
+          target: default
+          arch: x86_64
+          profile: pixel_2
+          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          disable-animations: true
+          script: ./gradlew connectedDebugAndroidTest
 
       - name: Run Android lint
         run: ./gradlew lintDebug
