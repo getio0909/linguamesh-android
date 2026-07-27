@@ -2,6 +2,23 @@
 
 Status date: 2026-07-27
 
+## 2026-07-27 — Hosted accessibility semantics checkpoint
+
+Assumption: Compose semantics assertions on the API 35 x86_64 emulator strengthen automated
+accessibility coverage only; they do not replace physical-device, TalkBack, visual, or manual
+review.
+
+- Android commit `599972aa87ee3844f55e1d77d92a7b70e30e1153` asserts stable content descriptions for
+  the source editor and streamed output, plus click semantics for the Translate action.
+- Hosted validation `30312368993` passed in 9m28s: API 35 Compose instrumentation, JVM tests,
+  debug/release lint, clean Core AAR rebuild and checksum/provenance checks, release APK/AAB
+  assembly, ephemeral package signatures, and artifact staging/upload.
+- A local `connectedDebugAndroidTest` compile completed, but execution stopped with `No connected
+  devices!`; no local device pass is claimed. This test-only commit does not change the published
+  artifact source pin or release manifest.
+- Physical accessibility, real-provider/Core integration, production signing, distribution,
+  rollback authorization, and stable-release gates remain open.
+
 ## 2026-07-27 — WorkManager translation restoration slice
 
 Assumption: WorkManager restores a bounded translation request after process recreation, while
