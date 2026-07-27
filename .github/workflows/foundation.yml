@@ -184,6 +184,43 @@ jobs:
       - name: Assemble release bundle
         run: ./gradlew bundleRelease
 
+      - name: Verify ephemeral Android package signatures
+        run: |
+          set -euo pipefail
+          signing_dir="$(mktemp -d)"
+          trap 'rm -rf "$signing_dir"' EXIT
+          signing_password="$(openssl rand -hex 24)"
+          keytool -genkeypair \
+            -keystore "$signing_dir/ci-keystore.p12" \
+            -storetype PKCS12 \
+            -storepass "$signing_password" \
+            -keypass "$signing_password" \
+            -alias linguamesh-ci \
+            -keyalg RSA \
+            -keysize 2048 \
+            -validity 1 \
+            -dname 'CN=LinguaMesh CI Ephemeral' \
+            -noprompt
+          apksigner_path="${ANDROID_HOME:-${ANDROID_SDK_ROOT}}/build-tools/36.0.0/apksigner"
+          "$apksigner_path" sign \
+            --ks "$signing_dir/ci-keystore.p12" \
+            --ks-type PKCS12 \
+            --ks-pass "pass:$signing_password" \
+            --key-pass "pass:$signing_password" \
+            --ks-key-alias linguamesh-ci \
+            --out "$signing_dir/app-release-signed.apk" \
+            app/build/outputs/apk/release/app-release-unsigned.apk
+          "$apksigner_path" verify --verbose "$signing_dir/app-release-signed.apk"
+          jarsigner \
+            -keystore "$signing_dir/ci-keystore.p12" \
+            -storetype PKCS12 \
+            -storepass "$signing_password" \
+            -keypass "$signing_password" \
+            -signedjar "$signing_dir/app-release-signed.aab" \
+            app/build/outputs/bundle/release/app-release.aab \
+            linguamesh-ci
+          jarsigner -verify -strict "$signing_dir/app-release-signed.aab"
+
       - name: Stage Android release artifacts
         run: |
           set -euo pipefail
