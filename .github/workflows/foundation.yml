@@ -170,8 +170,8 @@ jobs:
           set -euo pipefail
           dist_dir="$GITHUB_WORKSPACE/dist"
           mkdir -p "$dist_dir"
-          cp app/build/outputs/apk/release/app-release.apk \
-            "$dist_dir/LinguaMesh-android-release.apk"
+          cp app/build/outputs/apk/release/app-release-unsigned.apk \
+            "$dist_dir/LinguaMesh-android-release-unsigned.apk"
           cp app/build/outputs/bundle/release/app-release.aab \
             "$dist_dir/LinguaMesh-android-release.aab"
           cp core-sdk/linguamesh-core-android-0.1.0-alpha.1.aar \
@@ -179,7 +179,7 @@ jobs:
           printf '%s\n' \
             'Core revision: cb061d24a3e0c4059a65d099d30bc643e9e079ea' \
             'Localization revision: 43f5a6f069f6d0e6d075517b0c017784fe505b0d' \
-            'Artifact status: prerelease' > "$dist_dir/BUILD-INFO.txt"
+            'Artifact status: prerelease; unsigned' > "$dist_dir/BUILD-INFO.txt"
           (
             cd "$dist_dir"
             sha256sum -- *.apk *.aab *.aar > SHA256SUMS
