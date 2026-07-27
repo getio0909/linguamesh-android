@@ -1,10 +1,11 @@
 package org.linguamesh.android.ui
 
 import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.junit4.v2.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
-import androidx.compose.ui.test.performScrollTo
+import androidx.compose.ui.test.performScrollToNode
 import org.junit.Rule
 import org.junit.Test
 import org.linguamesh.android.core.ProviderProfile
@@ -50,7 +51,10 @@ class LinguaMeshAppTest {
         }
 
         composeRule.onNodeWithTag("source-input").assertIsDisplayed()
-        composeRule.onNodeWithTag("translation-output").performScrollTo().assertIsDisplayed()
+        composeRule
+            .onNodeWithTag("translation-screen")
+            .performScrollToNode(hasTestTag("translation-output"))
+        composeRule.onNodeWithTag("translation-output").assertIsDisplayed()
         composeRule.onNodeWithText("你好").assertIsDisplayed()
     }
 }

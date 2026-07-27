@@ -209,7 +209,7 @@ private fun TranslationScreen(
             }
         } else {
             LazyColumn(
-                modifier = contentModifier,
+                modifier = contentModifier.testTag("translation-screen"),
                 verticalArrangement = Arrangement.spacedBy(16.dp),
             ) {
                 item {
