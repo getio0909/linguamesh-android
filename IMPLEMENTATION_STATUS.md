@@ -2,10 +2,26 @@
 
 Status date: 2026-07-27
 
+## 2026-07-27 — Hosted Compose instrumentation checkpoint
+
+Assumption: the hosted emulator result validates the Compose UI fixture on the declared API and
+software-rendered emulator only; it does not replace physical-device, accessibility, restoration,
+real-Core, signing, or distribution evidence.
+
+- Android workflow `30301722748` passed on commit `011e8cd9835fa0fe448d814eea177dc32464ed2a`.
+- The run executed `connectedDebugAndroidTest` on an API 35 x86_64 Pixel 2 emulator with software
+  GPU rendering and disabled animations; the Compose workspace fixture passed.
+- The same run passed debug/release JVM tests, debug/release lint, clean Core AAR rebuild and
+  checksum/provenance checks, release APK/AAB assembly, and artifact staging/upload.
+- The fixture now scrolls the bounded `LazyColumn` container to the output node before asserting
+  visibility, so small emulator viewports exercise the actual responsive layout.
+- Local Android compilation remains unavailable on this host because no Android SDK location is
+  configured; Hosted CI is the reproducible execution evidence for this checkpoint.
+
 ## 2026-07-27 — Hosted prerelease artifact checkpoint
 
 Assumption: the unsigned APK/AAB and checksum-verified AAR are prerelease evidence only; device,
-instrumentation execution, signing, distribution, rollback, and stable-release gates remain open.
+signing, distribution, rollback, and stable-release gates remain open.
 
 - Artifact commit `e4dd84deaca0ef5bf34a3cfb31a4bbb6a290f73c` consumes Core
   `cb061d24a3e0c4059a65d099d30bc643e9e079ea` and l10n
@@ -106,7 +122,7 @@ Validation for this checkpoint on 2026-07-24 with JDK 21 and Android SDK 36:
 - Native event identity and sequence validation plus bounded cancellation draining; an unrecoverable or mismatched cancelled operation isolates the gateway.
 - Android Keystore AES-256-GCM credential broker with secret-reference AAD, mutable-buffer clearing, failure rollback, and backup/device-transfer exclusion.
 - Generated Android resources synchronized from clean `linguamesh-l10n` revision `7fd210692bb269ef52f7453bfeb2b0f0759b1d4c`; no local `strings.xml` override remains.
-- Sixteen JVM regression tests and one compiling Compose instrumentation test.
+- Sixteen JVM regression tests and one Compose instrumentation test executed in Hosted CI.
 - Core ABI 1 integration pinned to exact source revision
   `9e69d01cbae1ca0421923e059aa3252c4ecbe1be`; the release adapter maps
   `CoreResult.RESOURCE_EXHAUSTED` to a safe protocol failure.
@@ -126,7 +142,7 @@ Validation for this checkpoint on 2026-07-24 with JDK 21 and Android SDK 36:
 - Core-owned provider-profile persistence/loading, device-backed integration, and document workflows
   are not integrated; the release adapter now handles credential-bearing profiles through the typed
   host-secret exchange.
-- Instrumentation, accessibility, restoration, RTL screenshot, macrobenchmark, device Keystore, and real Core integration tests were not executed.
+- Accessibility, restoration, RTL screenshot, macrobenchmark, device Keystore, and real Core integration tests were not executed; the Compose fixture is UI-only.
 - Document workflows, Storage Access Framework leases, history, routing, background work, packaging, signing, and distribution remain unimplemented.
 
 ## Evidence
