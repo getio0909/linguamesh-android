@@ -2,8 +2,8 @@
 set -euo pipefail
 
 expected_goal_sha="11f9a65927aac7e57e2af119e9d21cc98e8d5a08b8a112a19ee1c47903e36198"
-expected_l10n_revision="7fd210692bb269ef52f7453bfeb2b0f0759b1d4c"
-expected_core_revision="9e69d01cbae1ca0421923e059aa3252c4ecbe1be"
+expected_l10n_revision="43f5a6f069f6d0e6d075517b0c017784fe505b0d"
+expected_core_revision="cb061d24a3e0c4059a65d099d30bc643e9e079ea"
 required_files=(
   README.md
   LICENSE

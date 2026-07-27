@@ -14,7 +14,7 @@ jobs:
     timeout-minutes: 75
     env:
       CORE_DIR: ${{ github.workspace }}/linguamesh-core
-      CORE_REVISION: 9e69d01cbae1ca0421923e059aa3252c4ecbe1be
+      CORE_REVISION: cb061d24a3e0c4059a65d099d30bc643e9e079ea
       LINGUAMESH_L10N_DIR: ${{ github.workspace }}/linguamesh-l10n
     steps:
       - name: Check out Android repository
@@ -31,7 +31,7 @@ jobs:
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
         with:
           repository: getio0909/linguamesh-l10n
-          ref: 7fd210692bb269ef52f7453bfeb2b0f0759b1d4c
+          ref: 43f5a6f069f6d0e6d075517b0c017784fe505b0d
           path: linguamesh-l10n
           persist-credentials: false
 
@@ -40,7 +40,7 @@ jobs:
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
         with:
           repository: getio0909/linguamesh-core
-          ref: 9e69d01cbae1ca0421923e059aa3252c4ecbe1be
+          ref: cb061d24a3e0c4059a65d099d30bc643e9e079ea
           path: linguamesh-core
           persist-credentials: false
 

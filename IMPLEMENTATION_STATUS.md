@@ -1,6 +1,19 @@
 # Implementation Status
 
-Status date: 2026-07-24
+Status date: 2026-07-27
+
+## 2026-07-27 — Central Linux-first prerelease pin alignment
+
+Assumption: the central prerelease compatibility train is the authoritative input for the next
+hosted Android check; changing only immutable source pins does not claim device or distribution
+readiness.
+
+- CI, the staged SDK revision, foundation checks, and release documentation now consume Core
+  `cb061d24a3e0c4059a65d099d30bc643e9e079ea` and l10n
+  `43f5a6f069f6d0e6d075517b0c017784fe505b0d`, matching central `release-manifest.toml`.
+- Hosted Android validation for this exact pair is required before adding Android artifacts to the
+  central prerelease; device, instrumentation execution, signing, and distribution gates remain
+  open.
 
 ## 2026-07-24 — Core VFS-descendant Android compatibility checkpoint
 

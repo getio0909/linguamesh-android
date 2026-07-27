@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-Use JDK 21 and Android SDK platform 36 with build-tools 36.0.0. Set `ANDROID_HOME` when the SDK is not discoverable. Localization validation requires a clean `linguamesh-l10n` worktree at revision `7fd210692bb269ef52f7453bfeb2b0f0759b1d4c`; set `LINGUAMESH_L10N_DIR` when it is not the default sibling checkout.
+Use JDK 21 and Android SDK platform 36 with build-tools 36.0.0. Set `ANDROID_HOME` when the SDK is not discoverable. Localization validation requires a clean `linguamesh-l10n` worktree at revision `43f5a6f069f6d0e6d075517b0c017784fe505b0d`; set `LINGUAMESH_L10N_DIR` when it is not the default sibling checkout.
 
 Release validation additionally requires the AAR built from the exact Core revision recorded in
 `core-sdk/REVISION`. The reproducible CI path uses JDK 21 for Core, NDK 28.2.13676358, Rust 1.93.0,
@@ -37,6 +37,6 @@ staged, run:
 ```
 
 The updated CI performs this sequence after building, checking, and staging the pinned Core AAR.
-Workflow `30099769434` passed the complete hosted sequence for Core `9e69d01cbae1ca0421923e059aa3252c4ecbe1be`.
+The hosted workflow must pass the complete sequence for Core `cb061d24a3e0c4059a65d099d30bc643e9e079ea`.
 Local release commands still require a freshly staged artifact and are not evidence of device or
 distribution readiness.
