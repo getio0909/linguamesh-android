@@ -2,6 +2,20 @@
 
 Status date: 2026-07-27
 
+## 2026-07-27 — Ephemeral package-signing smoke checkpoint
+
+Assumption: the temporary key and self-signed certificate prove only that Hosted CI can sign and
+cryptographically verify the Android package formats; they are never uploaded or used for a stable
+release.
+
+- Workflow `30305452239` passed the full Android validation path on commit `916195d`.
+- The run passed API 35 x86_64 Pixel 2 Compose instrumentation, JVM tests, lint, clean Core AAR
+  provenance/checksum checks, release APK/AAB assembly, and release artifact staging/upload.
+- The runner generated a temporary PKCS#12 key, verified APK v2/v3 signatures with `apksigner`,
+  verified the AAB JAR signature with `jarsigner`, and removed the temporary directory on exit.
+- Production Android signing, device/manual review, distribution, rollback, and stable-release
+  gates remain open.
+
 ## 2026-07-27 — Hosted Compose instrumentation checkpoint
 
 Assumption: the hosted emulator result validates the Compose UI fixture on the declared API and

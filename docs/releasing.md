@@ -1,6 +1,15 @@
 # Releasing
 
-No Android release is currently verified or publishable. Debug builds use an unavailable-Core implementation and are validation artifacts only.
+No stable Android release is currently verified or publishable. The Linux-first prerelease
+`v0.1.0-alpha.2-linux.5` contains unsigned Android artifacts; debug builds use an unavailable-Core
+implementation and are validation artifacts only.
+
+## Hosted signing smoke
+
+Workflow `30305452239` generated a runner-local PKCS#12 key, signed a copy of the release APK and
+AAB, verified the APK with `apksigner` and the AAB with `jarsigner`, then deleted the temporary
+directory. This is packaging-format evidence only and does not authorize production signing,
+distribution, or stable promotion.
 
 ## Core staging gate
 
