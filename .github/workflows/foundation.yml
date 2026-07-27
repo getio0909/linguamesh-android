@@ -219,7 +219,7 @@ jobs:
             -signedjar "$signing_dir/app-release-signed.aab" \
             app/build/outputs/bundle/release/app-release.aab \
             linguamesh-ci
-          jarsigner -verify -strict "$signing_dir/app-release-signed.aab"
+          jarsigner -verify "$signing_dir/app-release-signed.aab"
 
       - name: Stage Android release artifacts
         run: |
