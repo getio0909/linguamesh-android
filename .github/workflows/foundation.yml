@@ -99,8 +99,8 @@ jobs:
           sudo udevadm trigger --name-match=kvm
 
       - name: Run Compose instrumentation tests on API 35
-        # 固定 ReactiveCircus android-emulator-runner v2.38.0。
-        uses: ReactiveCircus/android-emulator-runner@cad321644df6d8cf1985a42767272ff068adb9cb
+        # 固定 ReactiveCircus android-emulator-runner v2.37.0。
+        uses: ReactiveCircus/android-emulator-runner@e89f39f1abbbd05b1113a29cf4db69e7540cae5a
         with:
           api-level: 35
           target: default
