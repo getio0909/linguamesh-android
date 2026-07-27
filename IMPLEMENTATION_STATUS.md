@@ -2,6 +2,23 @@
 
 Status date: 2026-07-27
 
+## 2026-07-27 — Hosted prerelease artifact checkpoint
+
+Assumption: the unsigned APK/AAB and checksum-verified AAR are prerelease evidence only; device,
+instrumentation execution, signing, distribution, rollback, and stable-release gates remain open.
+
+- Artifact commit `e4dd84deaca0ef5bf34a3cfb31a4bbb6a290f73c` consumes Core
+  `cb061d24a3e0c4059a65d099d30bc643e9e079ea` and l10n
+  `43f5a6f069f6d0e6d075517b0c017784fe505b0d`.
+- Hosted Android validation `30287899440` passed debug/release assembly, JVM tests,
+  instrumentation compilation, lint, clean Core AAR rebuild/checksum validation, bundle assembly,
+  and release artifact staging/upload.
+- A clean download passed `sha256sum --check SHA256SUMS`: unsigned APK
+  `0ea1aa42bcbea0189b86abc657fefd29843f38edc0b9f8efb5e2fc33b2c70530`, AAB
+  `c29af19c90c4ca1488de561b94446669c0526ad7b38ed28289fa4ca1dcf5df49`, and AAR
+  `ed9a7de3990e64ad67e3e9a2a1097911662f237f00edd802add6ebb82c6d81a6`.
+- No device execution or signed distribution package is claimed.
+
 ## 2026-07-27 — Central Linux-first prerelease pin alignment
 
 Assumption: the central prerelease compatibility train is the authoritative input for the next
