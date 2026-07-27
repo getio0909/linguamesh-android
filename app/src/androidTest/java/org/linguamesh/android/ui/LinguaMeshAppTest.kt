@@ -1,8 +1,10 @@
 package org.linguamesh.android.ui
 
 import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.assertHasClickAction
 import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.junit4.v2.createComposeRule
+import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performScrollToNode
@@ -56,5 +58,12 @@ class LinguaMeshAppTest {
             .performScrollToNode(hasTestTag("translation-output"))
         composeRule.onNodeWithTag("translation-output").assertIsDisplayed()
         composeRule.onNodeWithText("你好").assertIsDisplayed()
+        composeRule
+            .onNodeWithContentDescription("Text to translate", useUnmergedTree = true)
+            .assertIsDisplayed()
+        composeRule
+            .onNodeWithContentDescription("Streamed translation output", useUnmergedTree = true)
+            .assertIsDisplayed()
+        composeRule.onNodeWithText("Translate").assertHasClickAction()
     }
 }
