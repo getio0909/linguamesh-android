@@ -21,7 +21,11 @@ From the repository root run:
 ./gradlew lintDebug
 ```
 
-JVM tests cover provider validation and credential rollback, streaming and terminal-state handling, cancellation recovery bounds and identity isolation, profile switching, and application-scoped gateway ownership. The instrumentation source compiles a responsive Compose workspace test.
+JVM tests cover provider validation and credential rollback, streaming and terminal-state handling, cancellation recovery bounds and identity isolation, profile switching, application-scoped gateway ownership, and the WorkManager translation runner's profile restoration and retry mapping. The instrumentation source compiles a responsive Compose workspace test.
+
+Background translation requests must be created through `TranslationWorkScheduler`. The request
+contains only a bounded job ID, profile ID, locale, and source text; the worker reloads the profile
+and resolves credentials at execution time. WorkManager retries only provider-network failures.
 
 Hosted CI runs `./gradlew connectedDebugAndroidTest` on an API 35 x86_64 Pixel 2 emulator with
 animations disabled and software GPU rendering. Local runs still require a documented API

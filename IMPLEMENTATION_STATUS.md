@@ -2,6 +2,27 @@
 
 Status date: 2026-07-27
 
+## 2026-07-27 — WorkManager translation restoration slice
+
+Assumption: WorkManager restores a bounded translation request after process recreation, while
+provider profile metadata is loaded from DataStore and credential bytes remain behind the Android
+Keystore-backed `CredentialStore`; this does not claim physical-device recovery or real-provider
+success.
+
+- Added `TranslationWorkScheduler` with unique, replaceable work names, bounded input validation,
+  and exponential retry backoff.
+- Added `TranslationWorker`, which reloads the persisted profile by ID, creates an isolated Core
+  gateway, streams the translation, returns bounded output, retries network failures, and reports
+  stable English error codes without placing secrets in WorkManager input/output.
+- Added `TranslationJobRunnerTest` coverage for successful streaming restoration, missing profiles,
+  network retry mapping, and protocol streams without a terminal event.
+- Local validation passed with JDK 21 and Android SDK 36:
+  `ANDROID_HOME=/home/wangtinghu/Android/Sdk ./gradlew testDebugUnitTest --rerun-tasks` (31 tests),
+  `ANDROID_HOME=/home/wangtinghu/Android/Sdk ./gradlew compileDebugAndroidTestKotlin lintDebug`, and
+  `git diff --check`.
+- Hosted instrumentation and release workflow validation remain required; this slice does not
+  close device, accessibility, real-Core, signing, distribution, rollback, or stable-release gates.
+
 ## 2026-07-27 — Ephemeral package-signing smoke checkpoint
 
 Assumption: the temporary key and self-signed certificate prove only that Hosted CI can sign and
