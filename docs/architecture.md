@@ -10,7 +10,7 @@
 
 `CoreGateway` is the only app-facing Core contract. Debug builds bind `UnavailableCoreGateway`, so the UI can be built and tested without claiming translation capability. Release builds bind `NativeCoreGateway` from `app/src/release/` and require the exact staged AAR named in `core-sdk/README.md`.
 
-`core-sdk/REVISION` pins Core commit `795773474bc89e023e72345b49a8f561138aa604`, ABI major 1,
+`core-sdk/REVISION` pins Core commit `48a2d59e19611400499954384250f522e0fa6561`, ABI major 1,
 and protocol version 1. CI builds the AAR from that source instead of resolving a mutable or
 unverified binary dependency. `CoreResult.RESOURCE_EXHAUSTED` is mapped to a safe protocol failure.
 

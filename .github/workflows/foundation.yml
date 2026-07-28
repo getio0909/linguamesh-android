@@ -14,7 +14,7 @@ jobs:
     timeout-minutes: 90
     env:
       CORE_DIR: ${{ github.workspace }}/linguamesh-core
-      CORE_REVISION: 795773474bc89e023e72345b49a8f561138aa604
+      CORE_REVISION: 48a2d59e19611400499954384250f522e0fa6561
       LINGUAMESH_L10N_DIR: ${{ github.workspace }}/linguamesh-l10n
     steps:
       - name: Check out Android repository
@@ -40,7 +40,7 @@ jobs:
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
         with:
           repository: getio0909/linguamesh-core
-          ref: 795773474bc89e023e72345b49a8f561138aa604
+          ref: 48a2d59e19611400499954384250f522e0fa6561
           path: linguamesh-core
           persist-credentials: false
 
@@ -233,7 +233,7 @@ jobs:
           cp core-sdk/linguamesh-core-android-0.1.0-alpha.1.aar \
             "$dist_dir/LinguaMesh-core-android-0.1.0-alpha.1.aar"
           printf '%s\n' \
-            'Core revision: 795773474bc89e023e72345b49a8f561138aa604' \
+            'Core revision: 48a2d59e19611400499954384250f522e0fa6561' \
             'Localization revision: 43f5a6f069f6d0e6d075517b0c017784fe505b0d' \
             'Artifact status: prerelease; unsigned' > "$dist_dir/BUILD-INFO.txt"
           (
