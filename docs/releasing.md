@@ -14,7 +14,7 @@ distribution, or stable promotion.
 ## Core staging gate
 
 Release work requires `linguamesh-core-android-0.1.0-alpha.1.aar` built from Core revision
-`06813081669e36b6feec8a231cd9a53eaf643671`, with ABI major 1 and protocol version 1. After
+`81f04be8bff338a1df6409ba564ddca3ad0bddf3`, with ABI major 1 and protocol version 1. After
 independently verifying provenance, metadata, checksum, generated wrapper, and Protobuf runtime,
 stage it locally with:
 

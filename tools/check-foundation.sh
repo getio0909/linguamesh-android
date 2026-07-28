@@ -3,7 +3,7 @@ set -euo pipefail
 
 expected_goal_sha="11f9a65927aac7e57e2af119e9d21cc98e8d5a08b8a112a19ee1c47903e36198"
 expected_l10n_revision="43f5a6f069f6d0e6d075517b0c017784fe505b0d"
-expected_core_revision="06813081669e36b6feec8a231cd9a53eaf643671"
+expected_core_revision="81f04be8bff338a1df6409ba564ddca3ad0bddf3"
 required_files=(
   README.md
   LICENSE
