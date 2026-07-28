@@ -74,8 +74,15 @@ jobs:
       - name: Validate pinned revisions and Gradle versions
         run: |
           set -euo pipefail
-          [[ "$(cat core-sdk/REVISION)" == "$CORE_REVISION" ]]
-          [[ "$(git -C "$CORE_DIR" rev-parse HEAD)" == "$CORE_REVISION" ]]
+          file_revision="$(tr -d '\\r\\n' < core-sdk/REVISION)"
+          git_revision="$(git -C "$CORE_DIR" rev-parse HEAD)"
+          printf 'Pinned Core file revision: %s\\n' "$file_revision"
+          printf 'Checked-out Core revision: %s\\n' "$git_revision"
+          printf 'Expected Core revision: %s\\n' "$CORE_REVISION"
+          [[ "$file_revision" == "$CORE_REVISION" ]]
+          [[ "$git_revision" == "$CORE_REVISION" ]]
+          command -v gradle
+          command -v ./gradlew
           gradle --version | grep -F 'Gradle 9.5.0'
           ./gradlew --version | grep -F 'Gradle 9.5.0'
 
