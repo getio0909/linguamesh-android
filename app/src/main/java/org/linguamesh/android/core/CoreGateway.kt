@@ -7,6 +7,20 @@ data class CoreCompatibility(
     val protocolVersion: UInt,
 )
 
+val requiredCoreCompatibility = CoreCompatibility(abiMajor = 1u, protocolVersion = 1u)
+
+fun CoreCompatibility.incompatibilityAgainst(
+    expected: CoreCompatibility = requiredCoreCompatibility,
+): CoreGatewayException? {
+    if (this == expected) {
+        return null
+    }
+    return CoreGatewayException(
+        kind = CoreErrorKind.IncompatibleCore,
+        message = "The embedded Core ABI or protocol is incompatible with this client.",
+    )
+}
+
 data class ProviderProfile(
     val id: String,
     val name: String,

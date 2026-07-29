@@ -34,6 +34,10 @@ class NativeCoreGateway(
     private val recoveryFailure = AtomicReference<String?>(null)
     private val cancellationRecovery = CancellationRecoveryDrainer()
 
+    init {
+        compatibility.incompatibilityAgainst()?.let { throw it }
+    }
+
     override suspend fun saveProviderProfile(profile: ProviderProfile) {
         checkOpen()
         profiles[profile.id] = profile
