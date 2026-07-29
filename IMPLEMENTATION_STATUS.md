@@ -2,6 +2,23 @@
 
 Status date: 2026-07-27
 
+## 2026-07-29 — Hosted Scenario 5 provider-switch conformance
+
+Assumption: the JVM vector proves that selecting a saved provider profile changes the next Core
+request while keeping each profile's opaque credential reference isolated; it does not claim a
+physical-device or accessibility review.
+
+- Commit `bc996b0ab3a7dd984b8624329ae78f5f489010ec` adds
+  `switchingProfileUsesSelectedModelForNextCoreRequest`, recording the selected profile and model
+  sent to the Core gateway after a one-click profile switch.
+- Local targeted Gradle execution passed; the host-side full release build remains hosted evidence.
+- Hosted Android validation `30422955105` passed debug/release JVM tests, API 35 instrumentation,
+  lint, clean pinned Core AAR rebuild/checksum verification, release package assembly, and ephemeral
+  package-signature checks, including the new Scenario 5 vector.
+
+Physical-device, TalkBack/visual accessibility, production signing, distribution, rollback, and
+stable-release evidence remain open.
+
 ## 2026-07-27 — Hosted accessibility semantics checkpoint
 
 Assumption: Compose semantics assertions on the API 35 x86_64 emulator strengthen automated
