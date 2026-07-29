@@ -229,6 +229,26 @@ class TranslationViewModelTest {
     }
 
     @Test
+    fun switchingProfileUsesSelectedModelForNextCoreRequest() = runTest(dispatcher) {
+        val gateway = FakeCoreGateway()
+        val viewModel = TranslationViewModel(gateway, FakeCredentialStore(), dispatcher)
+        viewModel.saveProvider("First", "https://first.example/v1", "first-model", CharArray(0))
+        viewModel.saveProvider("Second", "https://second.example/v1", "second-model", CharArray(0))
+        advanceUntilIdle()
+
+        val first = viewModel.state.value.profiles.first()
+        viewModel.switchProfile(first.id)
+        viewModel.updateSourceText("Hello")
+        viewModel.translate()
+        dispatcher.scheduler.runCurrent()
+
+        assertEquals(first.id, gateway.lastCommand?.profile?.id)
+        assertEquals("first-model", gateway.lastCommand?.profile?.model)
+        gateway.completeWithoutTerminal()
+        advanceUntilIdle()
+    }
+
+    @Test
     fun providerSaveFailureDeletesBrokeredCredential() = runTest(dispatcher) {
         val gateway = FakeCoreGateway().apply {
             saveFailure = CoreGatewayException(CoreErrorKind.Network, "Provider save failed")
@@ -316,6 +336,7 @@ class TranslationViewModelTest {
 private class FakeCoreGateway : CoreGateway {
     override val compatibility = CoreCompatibility(abiMajor = 0u, protocolVersion = 1u)
     val savedProfiles = mutableListOf<ProviderProfile>()
+    var lastCommand: TranslationCommand? = null
     var cancelCalls = 0
     var closeCalls = 0
     var saveFailure: Exception? = null
@@ -331,6 +352,7 @@ private class FakeCoreGateway : CoreGateway {
         command: TranslationCommand,
         secretResolver: SecretResolver,
     ): Flow<CoreEvent> {
+        lastCommand = command
         events = Channel(Channel.UNLIMITED)
         return events.receiveAsFlow()
     }
